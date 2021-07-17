@@ -1,5 +1,7 @@
 package Gerencia.reuniao;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class Reserva
@@ -8,7 +10,6 @@ public class Reserva
     //Parametros-----------------------------------------------
     Collection<String> participantes;
     Sala sala;
-
     //Construtor-----------------------------------------------
     public Reserva(Sala sala, Collection<String> participantes)
     {
