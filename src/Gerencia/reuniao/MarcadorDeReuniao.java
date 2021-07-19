@@ -6,32 +6,30 @@ import java.time.*;
 public class MarcadorDeReuniao
 {
     //Construtor
-    public MarcadorDeReuniao()
-    {
+    List<String> listaDeParticipantes;
+    static List<Participantes> listaAux;
 
+    public MarcadorDeReuniao(List<Participantes> listaAux)
+    {
+        listaDeParticipantes = new ArrayList<>();
+        this.listaAux = listaAux;
     }
 
 //--------------------------------------------------------------------------
-    public void marcarReuniaoEntre(LocalDate dataInicial,
-                                   LocalDate dataFinal,
-                                   Collection<String> listaDeParticipantes)
+    public void marcarReuniaoEntre(LocalDate dataInicial, LocalDate dataFinal, Collection<String> listaDeParticipantes)
     {
+        
+    }
+//--------------------------------------------------------------------------
+
+    public void indicaDisponibilidadeDe(String participante, LocalDateTime inicio,LocalDateTime fim){
+        listaDeParticipantes.add(participante);
+        Participantes p = new Participantes(inicio, fim, participante);
 
     }
 //--------------------------------------------------------------------------
 
-    public void indicaDisponibilidadeDe(String participante,
-                                        LocalDateTime inicio,
-                                        LocalDateTime fim)
-    {
+    public void mostraSobreposicao(){
 
     }
-//--------------------------------------------------------------------------
-
-    public void mostraSobreposicao()
-    {
-
-    }
-
-
 }
