@@ -1,9 +1,10 @@
-package Gerencia.reuniao;
+/*package Gerencia.reuniao;
 import java.util.*;
 import java.time.*;
 
 public class GerenciadorDeSalas
 {
+
     //Construtor
     public GerenciadorDeSalas()
     {
@@ -47,3 +48,4 @@ public class GerenciadorDeSalas
 
     }
 }
+*/
