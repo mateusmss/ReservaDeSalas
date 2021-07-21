@@ -1,9 +1,8 @@
 package Gerencia.reuniao;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.time.LocalDate;
+import java.time.*;
 
 public class Main
 {
@@ -60,15 +59,15 @@ public class Main
 
 
             System.out.println("Digite a data final que você deseja fazer uma reserva. Formato: dia/mês/ano hora:minuto");
-            dataInicialScanner = scanner.next();
             dataFinalScanner = scanner.next();
             dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+            dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
 
-            System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto");
+            System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
             String horaFinalScanner = scanner.next();
             LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
             dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
-            System.out.println(dataInicialParticipantes);
+            System.out.println(dataFinalParticipantes);
 
             System.out.println("Digite 0 caso queira progressir em adicionar participantes ou 1 caso queira encerrar as marcações e ver resultados");
             marcar.indicaDisponibilidadeDe(nome,dataInicialParticipantes, dataFinalParticipantes);
@@ -84,9 +83,5 @@ public class Main
 
 
     }
-
-    /*{
-        MarcadorDeReuniao mr = new MarcadorDeReuniao(listaAux);
-    }*/
 
 }
