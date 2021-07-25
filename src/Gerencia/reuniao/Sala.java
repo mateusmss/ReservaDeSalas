@@ -1,15 +1,17 @@
 package Gerencia.reuniao;
+import java.time.*;
 
 public class Sala
 {
     private String nome;
-    private String local;
     private int capacidade;
     private String observacoes;
 
-    public Sala(){
+    private LocalDateTime rInicio;
+    private LocalDateTime rFim;
+
+    public Sala(String nome, int capacidade, String observacoes){
         this.nome = nome;
-        this.local = local;
         this.capacidade = capacidade;
         this.observacoes = observacoes;
     }
@@ -24,5 +26,10 @@ public class Sala
     }
     public String getObservacoes(){
         return this.nome;
+    }
+    public void setDateTime(LocalDateTime inicio, LocalDateTime fim)
+    {
+        rInicio = inicio;
+        rFim = fim;
     }
 }
