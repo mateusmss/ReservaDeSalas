@@ -45,17 +45,19 @@ public class GerenciadorDeSalas
     public Reserva reservaSalaChamada(String nomeDaSala, LocalDateTime
                                       dataInicial, LocalDateTime dataFinal)
     {
-        Sala sala;
-        Reserva reserva;
         for(Sala s : listaDeSalas)
         {
             if(s.getNome().equals(nomeDaSala))
             {
-                reserva = new Reserva();
+                Reserva reserva = new Reserva(s, null);
+                reserva.setInicio(dataInicial);;
+                reserva.setFim(dataFinal);
+                return reserva;
             }
 
         }
 
+        return null;
     }
 
 //---------------------------------------------------------

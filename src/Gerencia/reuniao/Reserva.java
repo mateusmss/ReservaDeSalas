@@ -10,6 +10,7 @@ public class Reserva
     //Parametros-----------------------------------------------
     Collection<String> participantes;
     Sala sala;
+    LocalDateTime inicio, fim;
     //Construtor-----------------------------------------------
     public Reserva(Sala sala, Collection<String> participantes)
     {
@@ -29,6 +30,8 @@ public class Reserva
 
 //---------------------------------------------------------------
     public Collection<String> getParticipantes(){ return participantes; }
+    public void setInicio(LocalDateTime pInicio){ inicio = pInicio; }
+    public void setFim(LocalDateTime pFim){ fim = pFim; }
 
 
 }
