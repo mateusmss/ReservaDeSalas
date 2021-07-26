@@ -6,6 +6,7 @@ public class Sala
     private String nome;
     private int capacidade;
     private String observacoes;
+    private Reserva reservada;
 
     private LocalDateTime rInicio;
     private LocalDateTime rFim;
@@ -27,9 +28,8 @@ public class Sala
     public String getObservacoes(){
         return this.nome;
     }
-    public void setDateTime(LocalDateTime inicio, LocalDateTime fim)
-    {
-        rInicio = inicio;
-        rFim = fim;
-    }
+    public void setReservada(Reserva reserva){ reservada = reserva; }
+    public void liberar(){ reservada = null; }
+    public Reserva getReservada(){ return reservada; }
+
 }

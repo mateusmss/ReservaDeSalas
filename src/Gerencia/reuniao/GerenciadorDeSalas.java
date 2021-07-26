@@ -38,7 +38,11 @@ public class GerenciadorDeSalas
 //---------------------------------------------------------
     public void adicionaSala(Sala novaSala)
     {
-        listaDeSalas.add(novaSala);
+        if(listaDeSalas.contains(novaSala))
+            System.out.println("Sala já está na coleção");
+        else if(checarPresense(novaSala))
+            System.out.println("ERRO em GerenciadorDeSalas: sala com mesmo nome já está na coleção");
+        else listaDeSalas.add(novaSala);
     }
 
 //---------------------------------------------------------
@@ -52,6 +56,7 @@ public class GerenciadorDeSalas
                 Reserva reserva = new Reserva(s, null);
                 reserva.setInicio(dataInicial);;
                 reserva.setFim(dataFinal);
+                s.setReservada(reserva);
                 return reserva;
             }
 
@@ -63,6 +68,21 @@ public class GerenciadorDeSalas
 //---------------------------------------------------------
     public void cancelaReserva(Reserva cancelada)
     {
+        for (Sala s : listaDeSalas)
+            if(s.getReservada().equals(cancelada))
+                s.liberar();
+    }
 
+
+//----------metodos-privados-------------------------------
+    private boolean checarPresense(Sala sala)
+    { boolean truth = false;
+
+        for(Sala s : listaDeSalas)
+            if(s.getNome().equals(sala.getNome()))
+                truth = true;
+
+
+        return truth;
     }
 }
