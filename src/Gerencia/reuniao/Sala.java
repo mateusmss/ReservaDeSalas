@@ -31,5 +31,11 @@ public class Sala
     public void setReservada(Reserva reserva){ reservada = reserva; }
     public void liberar(){ reservada = null; }
     public Reserva getReservada(){ return reservada; }
+    public boolean isReservada()
+    {
+        if(reservada != null)
+            return true;
+        else return false;
+    }
 
 }

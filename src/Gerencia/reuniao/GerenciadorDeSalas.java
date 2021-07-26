@@ -4,12 +4,13 @@ import java.time.*;
 
 public class GerenciadorDeSalas
 {
-    private List<Sala> listaDeSalas = new ArrayList<>();
+    private List<Sala> listaDeSalas;
+    private List<Sala> lista;
 
     //Construtor
     public GerenciadorDeSalas()
     {
-
+        listaDeSalas = new ArrayList<>();
     }
 
 //---------------------------------------------------------
@@ -53,14 +54,15 @@ public class GerenciadorDeSalas
         {
             if(s.getNome().equals(nomeDaSala))
             {
-                Reserva reserva = new Reserva(s, null);
-                reserva.setInicio(dataInicial);;
-                reserva.setFim(dataFinal);
-                s.setReservada(reserva);
-                return reserva;
-            }
-
-        }
+                if(s.isReservada())
+                    System.out.println("A sala já está reservada!");
+                else {
+                    Reserva reserva = new Reserva(s, null);
+                    reserva.setInicio(dataInicial);
+                    reserva.setFim(dataFinal);
+                    s.setReservada(reserva);
+                    return reserva;
+        } } }
 
         return null;
     }
@@ -81,7 +83,6 @@ public class GerenciadorDeSalas
         for(Sala s : listaDeSalas)
             if(s.getNome().equals(sala.getNome()))
                 truth = true;
-
 
         return truth;
     }
