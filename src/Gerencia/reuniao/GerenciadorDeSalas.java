@@ -5,7 +5,6 @@ import java.time.*;
 public class GerenciadorDeSalas
 {
     private List<Sala> listaDeSalas;
-    private List<Sala> lista;
 
     //Construtor
     public GerenciadorDeSalas()
@@ -54,7 +53,7 @@ public class GerenciadorDeSalas
         {
             if(s.getNome().equals(nomeDaSala))
             {
-                if(s.isReservada())
+                if(s.isReservada(dataInicial, dataFinal))
                     System.out.println("A sala já está reservada!");
                 else {
                     Reserva reserva = new Reserva(s, null);
@@ -75,6 +74,12 @@ public class GerenciadorDeSalas
                 s.liberar();
     }
 
+
+    Collection<Reserva> reservasParaSala(String nomeSala)
+    {
+
+
+    }
 
 //----------metodos-privados-------------------------------
     private boolean checarPresense(Sala sala)

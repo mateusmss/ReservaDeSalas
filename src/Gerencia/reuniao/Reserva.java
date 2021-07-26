@@ -32,6 +32,9 @@ public class Reserva
     public Collection<String> getParticipantes(){ return participantes; }
     public void setInicio(LocalDateTime pInicio){ inicio = pInicio; }
     public void setFim(LocalDateTime pFim){ fim = pFim; }
+    
+    public LocalDateTime getInicio(){ return inicio; }
+    public LocalDateTime getFim(){ return fim; }
 
 
 }

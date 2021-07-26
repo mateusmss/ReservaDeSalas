@@ -14,23 +14,20 @@ public class MarcadorDeReuniao
     public void marcarReuniaoEntre(LocalDate dataInicial, LocalDate dataFinal, Collection<String> listaDeParticipantes)
     {
         Period periodo = Period.between(dataInicial,dataFinal);
-        System.out.println(periodo);
         LocalDateTime localDateInicial = dataInicial.atTime(00,00,00);
         LocalDateTime localDateFinal = dataFinal.atTime(23,59, 59);
 
         /* Verificação se as datas requeridas estão no intervalo de datas pré definidas*/
         for(int i = 0; i < listaParticipantes.size();i++){
             if(localDateInicial.isBefore(listaParticipantes.get(i).getInicio())){
-                System.out.println("A data da reserva requerida é anterior a marcada");
+            System.out.println("A data da reserva requerida é anterior a marcada");
                 listaNaoDisponiveis.add(listaParticipantes.get(i));
-                System.out.println(localDateInicial);
-                System.out.println(localDateFinal);
             }
         /*Verificação se a data do candidato passa a pré escolhida*/
-            System.out.println(localDateInicial.isBefore(listaParticipantes.get(i).getInicio()));
+
         }
         for(int i = 0;i < listaParticipantes.size();i++){
-            if(localDateFinal.isBefore(listaParticipantes.get(i).getFim())){
+            if(localDateFinal.isAfter(listaParticipantes.get(i).getFim())){
                 System.out.println("A data da reserva requerida é posterior a marcada");
                 listaNaoDisponiveis.add(listaParticipantes.get(i));
             }
@@ -38,10 +35,22 @@ public class MarcadorDeReuniao
         listaParticipantes.removeAll(listaNaoDisponiveis);
 
         /*Verificação se as datas de inicio e fim dos participantes são comitentes ---> falta finalizar pra acabar essa parte*/
-        for(int i = 0;i <= listaParticipantes.size();i++){
-            /*if(){
+        for(int i = 0;i < listaParticipantes.size();i++){
+            try{
+                if(localDateInicial.get(i).getInicio().equals(localDateInicial.get(i+1).getInicio(){
+                      //Verificador de quantidade de salas if(){}
+                      System.out.println("Datas conflitantes entre" + listaParticipantes.get(i).getParticipante +" e " +  listaParticipantes.get(i+1).getParticipante);
+                      listaNaoDisponiveis.add(listaParticipantes.get(i));
 
-            }*/
+                }else if(localDateFinal.get(i).getFinal().equals(localDateFinal.get(i+1).getFinal()){
+                    //Verificador de quantidade de salas if(){}
+                      System.out.println("Datas conflitantes entre" + listaParticipantes.get(i).getParticipante +" e " +  listaParticipantes.get(i-1).getParticipante);
+                      listaNaoDisponiveis.add(listaParticipantes.get(i));   
+            }catch(Exception e){
+                break;
+            }
+        }
+   
         }
         mostraSobreposicao();
     }
