@@ -13,9 +13,11 @@ public class MarcadorDeReuniao
 //--------------------------------------------------------------------------
     public void marcarReuniaoEntre(LocalDate dataInicial, LocalDate dataFinal, Collection<String> listaDeParticipantes)
     {
-
+        Period periodo = Period.between(dataInicial,dataFinal);
+        System.out.println(periodo);
         LocalDateTime localDateInicial = dataInicial.atTime(00,00,00);
         LocalDateTime localDateFinal = dataFinal.atTime(23,59, 59);
+
         /* Verificação se as datas requeridas estão no intervalo de datas pré definidas*/
         for(int i = 0; i < listaParticipantes.size();i++){
             if(localDateInicial.isBefore(listaParticipantes.get(i).getInicio())){
@@ -34,7 +36,7 @@ public class MarcadorDeReuniao
             }
         }
         listaParticipantes.removeAll(listaNaoDisponiveis);
-        listaParticipantes.sort();
+
         /*Verificação se as datas de inicio e fim dos participantes são comitentes ---> falta finalizar pra acabar essa parte*/
         for(int i = 0;i <= listaParticipantes.size();i++){
             /*if(){
@@ -48,7 +50,7 @@ public class MarcadorDeReuniao
     public void indicaDisponibilidadeDe(String participante, LocalDateTime inicio,LocalDateTime fim){
         Participantes p = new Participantes(inicio, fim, participante);
         listaParticipantes.add(p);
-        listaParticipantes.sort((Comparator<? super Participantes>) p);
+        Collections.sort(listaParticipantes);
     }
 
 //--------------------------------------------------------------------------

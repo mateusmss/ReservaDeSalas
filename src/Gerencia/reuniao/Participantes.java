@@ -3,21 +3,32 @@ package Gerencia.reuniao;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Participantes {
-    String participante;
+public class Participantes implements Comparable<Participantes>{
+    String idParticipante;
     LocalDateTime inicio, fim;
 
     public Participantes(LocalDateTime inicio, LocalDateTime fim, String participante)
     {
-        this.participante = participante;
+        this.idParticipante = participante;
         this.inicio = inicio;
         this.fim = fim;
     }
     
-    public LocalDateTime getInicio(){ return inicio; }
-    public LocalDateTime getFim(){ return fim; }
-    public String getParticipante(){ return participante; }
-    
+    public LocalDateTime getInicio(){
+        return this.inicio;
+    }
+    public LocalDateTime getFim(){
+
+        return this.fim;
+    }
+    public String getParticipante(){
+
+        return this.idParticipante;
+    }
+    public int compareTo(Participantes o){
+        int valor = inicio.compareTo(o.inicio);
+        return (valor != 0 ? valor : 1);
+    }
     
 
 
