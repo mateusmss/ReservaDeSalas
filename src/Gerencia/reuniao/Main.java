@@ -56,7 +56,7 @@ public class Main
                 verificacao = false;
             }
         }
-        /* ******************************************************************************************** */
+        /* ******************************************************************************************* */
 
         /* Looping onde os participantes colocam seu email de verificação e possiveis horários disponíveis dentro de um periodo */
         verificacao = true;
@@ -69,16 +69,20 @@ public class Main
             System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto:segundo");
             String horaInicialScanner = scanner.next();
             DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-            LocalDateTime horaInicialteste = LocalDateTime.parse(horaInicialScanner, formatarHora);
+            LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
+            dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
+            System.out.println(dataInicialParticipantes);
 
             //Horário final disponível
             System.out.println("Digite o horário de fim que vocêtem disponível para a reunião. Formato: hora:minuto:segundo");
             String horaFinalScanner = scanner.next();
-            LocalDateTime horaFinalteste = LocalDateTime.parse(horaFinalScanner, formatarHora);
+            LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
+            dataFinalParticipantes = LocalDateTime.of(dataFinalteste, horaFinalteste);
+            System.out.println(dataInicialParticipantes);
 
             //Pergunta se quer prosseguir em adicionar participantes
             System.out.println("Digite 0 caso queira progressir em adicionar participantes ou 1 caso queira encerrar as marcações e ver resultados");
-            marcar.indicaDisponibilidadeDe(listaParticipantes.get(i),horaInicialteste, horaFinalteste);
+            marcar.indicaDisponibilidadeDe(listaParticipantes.get(i),dataInicialParticipantes, dataFinalParticipantes);
 
             //Teste de verificação
             System.out.println("Digite 0 caso queira progressir em adicionar datas ou 1 caso queira encerrar");
