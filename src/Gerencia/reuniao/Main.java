@@ -17,8 +17,8 @@ public class Main
         LocalDateTime dataFinalParticipantes;
         LocalTime horarioInicial;
         LocalTime horarioFinal;
-        LocalDate agora = LocalDate.now();
-
+        LocalDate dataInicial;
+        LocalDate dataFinal;
         boolean verificacao = true;//variavel de verificação
         Scanner scanner = new Scanner(System.in); //criando scanner
         DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //formatando o tipo de data
@@ -31,53 +31,15 @@ public class Main
         System.out.println("Digite a data de inicio da reunião. Formato: dia/mês/ano");
         String dataInicialScanner = scanner.next();
 
-        /*
-        Marcador de datas: O Algoritmo!
-         */
-        LocalDate dataInicialteste = null;
-        if(LocalDate.parse(dataInicialScanner, formatar).isBefore(agora)) {
-            int tmp = 0;
-            System.out.println("Não é possivel marcar eventos no passado" +
-                    " digite uma data valida!");
-            dataInicialScanner = scanner.next();
-            while (LocalDate.parse(dataInicialScanner, formatar).isBefore(agora)){
-                System.out.println("Não é possivel marcar eventos no passado" +
-                    " digite uma data valida!");
-                dataInicialScanner = scanner.next();
-                tmp++;
 
-                if(tmp > 10){ throw new IllegalArgumentException("Valor irresolvivel, fim de execução"); }
-            }
-            dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
-        }
-        else dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
+        LocalDate dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
+        dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
-        //-----------------------------------------------------------
         dataInicialMonitor = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
         System.out.println("Digite a data que quer fechar a reunião. Formato: dia/mês/ano");
-
-        LocalDate dataFinalteste = null;
         String dataFinalScanner = scanner.next();
-        /*
-        Marcador de datas: O Algoritmo!
-         */
-        if(LocalDate.parse(dataFinalScanner, formatar).isBefore(agora)) {
-            int tmp = 0;
-            System.out.println("Não é possivel marcar eventos no passado" +
-                    " digite uma data valida!");
-            dataFinalScanner = scanner.next();
-            while (LocalDate.parse(dataFinalScanner, formatar).isBefore(agora)){
-                System.out.println("Não é possivel marcar eventos no passado" +
-                        " digite uma data valida!");
-                dataFinalScanner = scanner.next();
-                tmp++;
-
-                if(tmp > 10){ throw new IllegalArgumentException("Valor irresolvivel, fim de execução"); }
-            }
-            dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
-        }
-        else dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+        LocalDate dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
 
         dataFinalMonitor = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
 
@@ -105,6 +67,11 @@ public class Main
             int i = 0;
             //Nome do participante
             System.out.println("Olá: " + listaParticipantes.get(i));
+            //Data Inicial
+            System.out.println("Digite a data de inicio que você deseja fazer uma reserva. Formato: dia/mês/ano");
+            dataInicialScanner = scanner.next();
+            dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
+            dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
             //Horário inicial disponivel
             System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto:segundo");
@@ -114,12 +81,19 @@ public class Main
             dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
             System.out.println(dataInicialParticipantes);
 
+            //data final disponivel
+            System.out.println("Digite a data final que você deseja fazer uma reserva. Formato: dia/mês/ano");
+            dataFinalScanner = scanner.next();
+            dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+            dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
+
+
             //Horário final disponível
-            System.out.println("Digite o horário de fim que vocêtem disponível para a reunião. Formato: hora:minuto:segundo");
+            System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
             String horaFinalScanner = scanner.next();
             LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
-            dataFinalParticipantes = LocalDateTime.of(dataFinalteste, horaFinalteste);
-            System.out.println(dataInicialParticipantes);
+            dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
+            System.out.println(dataFinalParticipantes);
 
             //Pergunta se quer prosseguir em adicionar participantes
             System.out.println("Digite 0 caso queira progressir em adicionar participantes ou 1 caso queira encerrar as marcações e ver resultados");
