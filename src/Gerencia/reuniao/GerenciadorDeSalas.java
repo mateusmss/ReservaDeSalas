@@ -67,19 +67,19 @@ public class GerenciadorDeSalas
     }
 
 //---------------------------------------------------------
-    public void cancelaReserva(Reserva cancelada)
+    /*public void cancelaReserva(Reserva cancelada)
     {
         for (Sala s : listaDeSalas)
             if(s.getReservada().equals(cancelada))
                 s.liberar();
-    }
+    }*/
 
 
-    Collection<Reserva> reservasParaSala(String nomeSala)
+    /*Collection<Reserva> reservasParaSala(String nomeSala)
     {
 
 
-    }
+    }*/
 
 //----------metodos-privados-------------------------------
     private boolean checarPresense(Sala sala)

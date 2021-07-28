@@ -10,7 +10,7 @@ public class MarcadorDeReuniao
     List<Participantes> listaNaoDisponiveis = new ArrayList<>();
     List<Participantes> listaDisponiveis = new ArrayList<>();
 
-//--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     public void marcarReuniaoEntre(LocalDate dataInicial, LocalDate dataFinal, Collection<String> listaDeParticipantes)
     {
         Period periodo = Period.between(dataInicial,dataFinal);
@@ -20,10 +20,10 @@ public class MarcadorDeReuniao
         /* Verificação se as datas requeridas estão no intervalo de datas pré definidas*/
         for(int i = 0; i < listaParticipantes.size();i++){
             if(localDateInicial.isBefore(listaParticipantes.get(i).getInicio())){
-            System.out.println("A data da reserva requerida é anterior a marcada");
+                System.out.println("A data da reserva requerida é anterior a marcada");
                 listaNaoDisponiveis.add(listaParticipantes.get(i));
             }
-        /*Verificação se a data do candidato passa a pré escolhida*/
+            /*Verificação se a data do candidato passa a pré escolhida*/
 
         }
         for(int i = 0;i < listaParticipantes.size();i++){
@@ -35,21 +35,22 @@ public class MarcadorDeReuniao
         listaParticipantes.removeAll(listaNaoDisponiveis);
 
         /*Verificação se as datas de inicio e fim dos participantes são comitentes ---> falta finalizar pra acabar essa parte*/
-        for(int i = 0;i < listaParticipantes.size();i++){
+        for(int k = 0;k < listaParticipantes.size();k++){
             try{
-                if(localDateInicial.get(i).getInicio().equals(localDateInicial.get(i+1).getInicio(){
-                      //Verificador de quantidade de salas if(){}
-                      System.out.println("Datas conflitantes entre" + listaParticipantes.get(i).getParticipante +" e " +  listaParticipantes.get(i+1).getParticipante);
-                      listaNaoDisponiveis.add(listaParticipantes.get(i));
+                    if(listaParticipantes.get(k).getInicio() ==  listaParticipantes.get(k + 1).getInicio()){
 
-                }else if(localDateFinal.get(i).getFinal().equals(localDateFinal.get(i+1).getFinal()){
+                        //Verificador de quantidade de salas if(){}
+                        System.out.println("Datas conflitantes entre" + listaParticipantes.get(k).getParticipante() +" e " +  listaParticipantes.get(k+1).getParticipante());
+                        listaNaoDisponiveis.add(listaParticipantes.get(k));
+
+                }else if(listaParticipantes.get(k).getFim().equals(listaParticipantes.get(k+1).getFim())){
                     //Verificador de quantidade de salas if(){}
-                      System.out.println("Datas conflitantes entre" + listaParticipantes.get(i).getParticipante +" e " +  listaParticipantes.get(i-1).getParticipante);
-                      listaNaoDisponiveis.add(listaParticipantes.get(i));   
-            }catch(Exception e){
+                      System.out.println("Datas conflitantes entre" + listaParticipantes.get(k).getParticipante() +" e " +  listaParticipantes.get(k-1).getParticipante());
+                      listaNaoDisponiveis.add(listaParticipantes.get(k));
+            }
+        }catch(Exception e){
                 break;
             }
-        }
    
         }
         mostraSobreposicao();
@@ -65,12 +66,12 @@ public class MarcadorDeReuniao
 //--------------------------------------------------------------------------
 
     public void mostraSobreposicao(){
-            System.out.println("Os participantes que poderão participar com seus respectivos horários: ");
-            for(int i = 0;i <listaParticipantes.size();i++){
-                System.out.println(listaParticipantes.get(i).getParticipante());
-                System.out.println(listaParticipantes.get(i).getInicio());
-                System.out.println(listaParticipantes.get(i).getFim());
-            }
+        System.out.println("Os participantes que poderão participar com seus respectivos horários: ");
+        for(int i = 0;i <listaParticipantes.size();i++){
+            System.out.println(listaParticipantes.get(i).getParticipante());
+            System.out.println(listaParticipantes.get(i).getInicio());
+            System.out.println(listaParticipantes.get(i).getFim());
+        }
 
     }
 }

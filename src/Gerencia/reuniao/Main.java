@@ -7,6 +7,8 @@ import java.time.*;
 public class Main
 {
     public static void main(String args[]){
+        /* Criação de variáveis e lista*/
+        List<String> listaParticipantes = new ArrayList<>();
         //private static List<Participantes> listaAux;
         List<String> participantes = new ArrayList<>();
         LocalDate dataInicialMonitor;
@@ -15,10 +17,12 @@ public class Main
         LocalDateTime dataFinalParticipantes;
         LocalTime horarioInicial;
         LocalTime horarioFinal;
-        boolean verificacao = true;
-        Scanner scanner = new Scanner(System.in);
-        DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        boolean verificacao = true;//variavel de verificação
+        Scanner scanner = new Scanner(System.in); //criando scanner
+        DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //formatando o tipo de data
+        /* ************************************************** */
 
+        /* Parte do scanner da data inicial e final ditas pelo organizador*/
         System.out.println("Digite seu nome:");
         String nome = scanner.next();
 
@@ -39,48 +43,58 @@ public class Main
         System.out.println("A data inicial é: " + dataInicialMonitor + ", a data final é: " +dataFinalMonitor);
         MarcadorDeReuniao marcar = new MarcadorDeReuniao();
 
+        /* ****************************************************** */
 
+        /*Organizador insere os emails dos participantes*/
         while(verificacao){
-            System.out.println("Digite seu email: ");
+            System.out.println("Digite os participantes: ");
             nome = scanner.next();
+            listaParticipantes.add(nome);
+            System.out.println("Digite 0 caso queira progressir em adicionar participantes ou 1 caso queira encerrar");
+            int teste = scanner.nextInt();
+            if(teste == 1){
+                verificacao = false;
+            }
+        }
+        /* ******************************************************************************************* */
 
-            System.out.println("Digite a data de inicio que você deseja fazer uma reserva. Formato: dia/mês/ano");
-            dataInicialScanner = scanner.next();
-            dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
-            LocalDate dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
+        /* Looping onde os participantes colocam seu email de verificação e possiveis horários disponíveis dentro de um periodo */
+        verificacao = true;
+        while(verificacao){
+            int i = 0;
+            //Nome do participante
+            System.out.println("Olá: " + listaParticipantes.get(i));
 
-
-            System.out.println("Digite o horário de inicio que você deseja fazer uma reserva. Formato: hora:minuto");
+            //Horário inicial disponivel
+            System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto:segundo");
             String horaInicialScanner = scanner.next();
             DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-            LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
-            dataInicialParticipantes = LocalDateTime.of(dataInicial, horaInicialteste);
-            //System.out.println(dataInicialParticipantes);
+            LocalDateTime horaInicialteste = LocalDateTime.parse(horaInicialScanner, formatarHora);
 
-
-            System.out.println("Digite a data final que você deseja fazer uma reserva. Formato: dia/mês/ano");
-            dataFinalScanner = scanner.next();
-            dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
-            LocalDate dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
-
-            System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
+            //Horário final disponível
+            System.out.println("Digite o horário de fim que vocêtem disponível para a reunião. Formato: hora:minuto:segundo");
             String horaFinalScanner = scanner.next();
-            LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
-            dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
-            //System.out.println(dataFinalParticipantes);
+            LocalDateTime horaFinalteste = LocalDateTime.parse(horaFinalScanner, formatarHora);
 
+            //Pergunta se quer prosseguir em adicionar participantes
             System.out.println("Digite 0 caso queira progressir em adicionar participantes ou 1 caso queira encerrar as marcações e ver resultados");
-            marcar.indicaDisponibilidadeDe(nome,dataInicialParticipantes, dataFinalParticipantes);
+            marcar.indicaDisponibilidadeDe(listaParticipantes.get(i),horaInicialteste, horaFinalteste);
 
+            //Teste de verificação
+            System.out.println("Digite 0 caso queira progressir em adicionar datas ou 1 caso queira encerrar");
             int teste = scanner.nextInt();
             if(teste == 1){
                 verificacao = false;
             }
 
         }
+        /* ************************************************************************************ */
+
+        /* Passando as datas para o MarcadorDeReunião e mostrando resultados */
         marcar.marcarReuniaoEntre(dataInicialMonitor,dataFinalMonitor,participantes);
         System.out.println("Resultados: ");
 
+        /* ************************************************************************************ */
 
     }
 

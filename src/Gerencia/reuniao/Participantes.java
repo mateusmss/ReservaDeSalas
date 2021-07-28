@@ -25,6 +25,7 @@ public class Participantes implements Comparable<Participantes>{
 
         return this.idParticipante;
     }
+
     public int compareTo(Participantes o){
         int valor = inicio.compareTo(o.inicio);
         return (valor != 0 ? valor : 1);
