@@ -56,7 +56,7 @@ public class Main
                 verificacao = false;
             }
         }
-        /* ******************************************************************************************* */
+        /* ******************************************************************************************** */
 
         /* Looping onde os participantes colocam seu email de verificação e possiveis horários disponíveis dentro de um periodo */
         verificacao = true;
