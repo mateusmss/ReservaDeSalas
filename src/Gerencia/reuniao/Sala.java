@@ -31,7 +31,19 @@ public class Sala
     public String getObservacoes(){
         return this.nome;
     }
-    public void liberar(){ reservada = null; }
+    public void liberar(Reserva r)
+    {
+        for(Reserva s : reservada)
+        {
+            if(s.getUUID().hashCode() == r.getUUID().hashCode())
+            {
+                reservada.remove(r);
+                return;
+            } }
+
+        System.out.println("RESERVA NÃO PODE SER LIBERADA: ela não existe");
+
+    }
 
 
     public Reserva getReservada(LocalDateTime inicio, LocalDateTime fim)

@@ -67,12 +67,18 @@ public class GerenciadorDeSalas
     }
 
 //---------------------------------------------------------
-    /*public void cancelaReserva(Reserva cancelada)
+    public void cancelaReserva(Reserva cancelada)
     {
         for (Sala s : listaDeSalas)
-            if(s.getReservada().equals(cancelada))
-                s.liberar();
-    }*/
+            if(s.getReservada(cancelada.getInicio(), cancelada.getFim()).getUUID().hashCode()
+                == cancelada.getUUID().hashCode())
+                { s.liberar(cancelada);
+                    return; }
+
+        System.out.println("RESERVA NÃO PODE SER LIBERADA: ela não existe");
+
+
+    }
 
 
     /*Collection<Reserva> reservasParaSala(String nomeSala)
