@@ -1,6 +1,7 @@
 package Gerencia.reuniao;
 import java.time.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Sala
@@ -78,6 +79,11 @@ public class Sala
             }
             reservada.add(reserva);
         } }
+
+    public Collection<Reserva> getListaReservada()
+    {
+        return this.reservada;
+    }
 
 
 //----------------metodos-privados----------------

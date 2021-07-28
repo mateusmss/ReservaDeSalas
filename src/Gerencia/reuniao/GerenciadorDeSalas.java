@@ -81,11 +81,14 @@ public class GerenciadorDeSalas
     }
 
 
-    /*Collection<Reserva> reservasParaSala(String nomeSala)
+    Collection<Reserva> reservasParaSala(String nomeSala)
     {
+        for(Sala s : listaDeSalas)
+            if(s.getNome().equals(nomeSala))
+            { return s.getListaReservada(); }
 
-
-    }*/
+        return null;
+    }
 
 //----------metodos-privados-------------------------------
     private boolean checarPresense(Sala sala)
