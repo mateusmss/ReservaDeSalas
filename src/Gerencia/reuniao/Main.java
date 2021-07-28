@@ -19,6 +19,7 @@ public class Main
         LocalTime horarioFinal;
         LocalDate dataInicial;
         LocalDate dataFinal;
+        LocalDate agora = LocalDate.now();
         boolean verificacao = true;//variavel de verificação
         Scanner scanner = new Scanner(System.in); //criando scanner
         DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //formatando o tipo de data
@@ -31,15 +32,55 @@ public class Main
         System.out.println("Digite a data de inicio da reunião. Formato: dia/mês/ano");
         String dataInicialScanner = scanner.next();
 
+        /*
+        Verificador de datas iniciais
+         */
+        LocalDate dataInicialteste = null;
+        if(LocalDate.parse(dataInicialScanner, formatar).isBefore(agora)) {
+            int tmp = 0;
+            System.out.println("Não é possivel marcar eventos no passado" +
+                    " digite uma data valida!");
+            dataInicialScanner = scanner.next();
+            while (LocalDate.parse(dataInicialScanner, formatar).isBefore(agora)){
+                System.out.println("Não é possivel marcar eventos no passado" +
+                        " digite uma data valida!");
+                dataInicialScanner = scanner.next();
+                tmp++;
 
-        LocalDate dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
+                if(tmp > 10){ throw new IllegalArgumentException("Valor irresolvivel, fim de execução"); }
+            }
+            dataInicialteste   = LocalDate.parse(dataInicialScanner, formatar);
+        }
+        else dataInicialteste   = LocalDate.parse(dataInicialScanner, formatar);
+
         dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
-
         dataInicialMonitor = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
+        // -------------------------------------------------------------
+
+        /*
+        Verificador de datas finais
+         */
 
         System.out.println("Digite a data que quer fechar a reunião. Formato: dia/mês/ano");
+        LocalDate dataFinalteste = null;
         String dataFinalScanner = scanner.next();
-        LocalDate dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+        if(LocalDate.parse(dataFinalScanner, formatar).isBefore(agora)) {
+            int tmp = 0;
+            System.out.println("Não é possivel marcar eventos no passado" +
+                    " digite uma data valida!");
+            dataFinalScanner = scanner.next();
+            while (LocalDate.parse(dataFinalScanner, formatar).isBefore(agora)){
+                System.out.println("Não é possivel marcar eventos no passado" +
+                        " digite uma data valida novamente!");
+                dataFinalScanner = scanner.next();
+                tmp++;
+
+                if(tmp > 10){ throw new IllegalArgumentException("Valor irresolvivel, fim de execução"); }
+            }
+            dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+        }
+        else dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+
 
         dataFinalMonitor = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
 
