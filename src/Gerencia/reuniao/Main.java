@@ -23,7 +23,7 @@ public class Main
         boolean verificacao = true;//variavel de verificação
         Scanner scanner = new Scanner(System.in); //criando scanner
         DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //formatando o tipo de data
-        /* ************************************************** */
+        /* *************************************************** */
 
         /* Parte do scanner da data inicial e final ditas pelo organizador*/
         System.out.println("Digite seu nome:");
