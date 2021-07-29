@@ -8,13 +8,11 @@ public class Participantes implements Comparable<Participantes>{
     private String idParticipante;
     private LocalDateTime inicio, fim;
 
-
     public Participantes(LocalDateTime inicio, LocalDateTime fim, String participante)
     {
         this.idParticipante = participante;
         this.inicio = inicio;
         this.fim = fim;
-        this.id = UUID.randomUUID();
     }
     
     public LocalDateTime getInicio(){

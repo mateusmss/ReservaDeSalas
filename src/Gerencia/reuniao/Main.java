@@ -13,8 +13,8 @@ public class Main
         List<String> participantes = new ArrayList<>();
         LocalDate dataInicialMonitor;
         LocalDate dataFinalMonitor;
-        LocalDateTime dataInicialParticipantes;
-        LocalDateTime dataFinalParticipantes;
+        LocalDateTime dataInicialParticipantes = null;
+        LocalDateTime dataFinalParticipantes = null;
         LocalDate dataInicial;
         LocalDate dataFinal;
         LocalDate agora = LocalDate.now();
@@ -55,9 +55,7 @@ public class Main
         dataInicialMonitor = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
         // -------------------------------------------------------------
 
-
         /*Verificador de datas finais*/
-
 
         System.out.println("Digite a data que quer fechar a reunião. Formato: dia/mês/ano");
         LocalDate dataFinalteste = null;
@@ -79,7 +77,6 @@ public class Main
         }
         else dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
 
-
         dataFinalMonitor = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
 
         //System.out.println("A data inicial é: " + dataInicialMonitor + ", a data final é: " +dataFinalMonitor);
@@ -93,10 +90,28 @@ public class Main
             System.out.println("[1] Cadastrar participantes ");
             System.out.println("[2] Finalizar cadastro de participantes");
             int teste = scanner.nextInt();
+            int count = 0;
             if(teste == 1){
-                System.out.println("Digite os participantes por endereço de email: ");
-                nome = scanner.next();
-                listaParticipantes.add(nome);
+                try{
+                    System.out.println("Digite os participantes por endereço de email: ");
+                    nome = scanner.next();
+                    while (nome.contains("@") != true){
+                        System.out.println("--------------- Problema Encontrado -----------");
+                        System.out.println("                                                   ");
+                        System.out.println("Digite um email válido: ");
+                        nome = scanner.next();
+                        count++;
+                        if(count == 3){
+                            throw new Exception();
+                        }
+                    }
+                    listaParticipantes.add(nome);
+                }catch(Exception e){
+                    System.out.println("--------------- Problema Encontrado -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Encerramento do programa ");
+                    System.exit(0);
+                }
             }
             if(teste == 2){
                 verificacao = false;
@@ -106,35 +121,64 @@ public class Main
 
         /* Looping onde os participantes colocam seu email de verificação e possiveis horários disponíveis dentro de um periodo */
         verificacao = true;
+        int count2 = 0;
         for(int k = 0;k < listaParticipantes.size();k++){
             System.out.println("=========== Cadastro dos participantes ===========");
-            //Nome do participante
-            System.out.println("Olá, " +listaParticipantes.get(k));
+            try{
+                while (count2 <= 3){
+                    //Nome do participante
+                    System.out.println("Olá, " +listaParticipantes.get(k));
+                    //Data de disponibilidade
+                    System.out.println("Digite a data de inicio que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
+                    dataInicialScanner = scanner.next();
+                    dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
+                    dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
-            //Data de disponibilidade
-            System.out.println("Digite a data de inicio que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
-            dataInicialScanner = scanner.next();
-            dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
-            dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
+                    System.out.println("Digite a data final que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
+                    dataFinalScanner = scanner.next();
+                    dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+                    dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
 
-            System.out.println("Digite a data final que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
-            dataFinalScanner = scanner.next();
-            dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
-            dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
+                    //Horário inicial disponivel
+                    System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto");
+                    String horaInicialScanner = scanner.next();
+                    DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
 
-            //Horário inicial disponivel
-            System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto");
-            String horaInicialScanner = scanner.next();
-            DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
-            dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
 
-            //Horário final disponível
-            System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto");
-            String horaFinalScanner = scanner.next();
-            LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
-            dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
+                    //Horário final disponível
+                    System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto");
+                    String horaFinalScanner = scanner.next();
+                    LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
 
+
+                    if(dataInicial.isAfter(dataFinal)){
+                        System.out.println("--------------- Problema Encontrado -----------");
+                        System.out.println("                                                   ");
+                        System.out.println("Data final é anterior a data inicial, digite novamente. Data não computada");
+                    }
+                    if(horaInicialteste.isAfter(horaFinalteste)){
+                        System.out.println("--------------- Problema Encontrado -----------");
+                        System.out.println("                                                   ");
+                        System.out.println("Horário inicial é posterior ao horário final. Horário não computado");
+                    }
+                    if (!dataInicial.isAfter(dataFinal) && !horaInicialteste.isAfter(horaFinalteste)){
+                        dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
+                        dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
+                        break;
+                    }
+                    count2++;
+                    if(count2 == 3){
+                        throw new Exception();
+                    }
+                }
+
+            }catch(Exception e){
+                System.out.println("--------------- Problema Encontrado -----------");
+                System.out.println("                                                   ");
+                System.out.println("Encerramento do programa");
+                System.exit(0);
+            }
 
             //Pergunta se quer prosseguir em adicionar participantes
 
@@ -149,6 +193,7 @@ public class Main
         boolean verificacao2 = true;
         GerenciadorDeSalas sala = new GerenciadorDeSalas();
         while(verificacao2){
+            try { Thread.sleep (5000); } catch (InterruptedException ex) {}
             System.out.println("=========== Reservas de Sala ===========");
             System.out.println("                                        ");
             System.out.println("[1] Adicionar chamada de sala");
@@ -254,12 +299,7 @@ public class Main
                 }
             }
         }
-
-
         }
-
-
-
     }
 
 
