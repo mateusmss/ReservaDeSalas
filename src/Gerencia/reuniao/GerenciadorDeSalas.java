@@ -90,6 +90,18 @@ public class GerenciadorDeSalas
         return null;
     }
 
+    public void imprimeReservasDaSala(String nomeSala)
+    {
+        Collection<Reserva> lc = reservasParaSala(nomeSala);
+
+        Iterator i = lc.iterator();
+
+        while(i.hasNext())
+        {
+            System.out.println("reserva de indice i = "+i.toString());
+            System.out.println("");
+        }
+    }
 //----------metodos-privados-------------------------------
     private boolean checarPresense(Sala sala)
     { boolean truth = false;

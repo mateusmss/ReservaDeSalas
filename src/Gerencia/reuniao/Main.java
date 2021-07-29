@@ -15,8 +15,6 @@ public class Main
         LocalDate dataFinalMonitor;
         LocalDateTime dataInicialParticipantes;
         LocalDateTime dataFinalParticipantes;
-        LocalTime horarioInicial;
-        LocalTime horarioFinal;
         LocalDate dataInicial;
         LocalDate dataFinal;
         LocalDate agora = LocalDate.now();
@@ -26,6 +24,8 @@ public class Main
         /* ************************************************** */
 
         /* Parte do scanner da data inicial e final ditas pelo organizador*/
+        System.out.println("=========== Sistema de Cadastro de Participantes ===========");
+        System.out.println("Bem-vindo ao Sistema de Cadastro, organizador.");
         System.out.println("Digite seu nome:");
         String nome = scanner.next();
 
@@ -82,19 +82,23 @@ public class Main
 
         dataFinalMonitor = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
 
-        System.out.println("A data inicial é: " + dataInicialMonitor + ", a data final é: " +dataFinalMonitor);
+        //System.out.println("A data inicial é: " + dataInicialMonitor + ", a data final é: " +dataFinalMonitor);
         MarcadorDeReuniao marcar = new MarcadorDeReuniao();
 
         /* ****************************************************** */
 
         /*Organizador insere os emails dos participantes*/
+        System.out.println("=========== Cadastro de participantes ===========");
         while(verificacao){
-            System.out.println("Digite os participantes: ");
-            nome = scanner.next();
-            listaParticipantes.add(nome);
-            System.out.println("Digite 0 caso queira prosseguir em adicionar participantes ou 1 caso queira encerrar");
+            System.out.println("[1] Cadastrar participantes ");
+            System.out.println("[2] Finalizar cadastro de participantes");
             int teste = scanner.nextInt();
             if(teste == 1){
+                System.out.println("Digite os participantes por endereço de email: ");
+                nome = scanner.next();
+                listaParticipantes.add(nome);
+            }
+            if(teste == 2){
                 verificacao = false;
             }
         }
@@ -102,53 +106,160 @@ public class Main
 
         /* Looping onde os participantes colocam seu email de verificação e possiveis horários disponíveis dentro de um periodo */
         verificacao = true;
-        int i = 0;
-        while(verificacao){
-
+        for(int k = 0;k < listaParticipantes.size();k++){
+            System.out.println("=========== Cadastro dos participantes ===========");
             //Nome do participante
-            System.out.println("Olá: " + listaParticipantes.get(i));
+            System.out.println("Olá, " +listaParticipantes.get(k));
+
             //Data de disponibilidade
-            System.out.println("Digite a data que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
+            System.out.println("Digite a data de inicio que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
             dataInicialScanner = scanner.next();
             dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
             dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
+            System.out.println("Digite a data final que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
+            dataFinalScanner = scanner.next();
+            dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
+            dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
+
             //Horário inicial disponivel
-            System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto:segundo");
+            System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto");
             String horaInicialScanner = scanner.next();
-            DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+            DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
             dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
-            System.out.println(dataInicialParticipantes);
 
             //Horário final disponível
-            System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
+            System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto");
             String horaFinalScanner = scanner.next();
             LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
-            dataFinalParticipantes = LocalDateTime.of(dataInicial, horaFinalteste);
-            System.out.println(dataFinalParticipantes);
+            dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
+
 
             //Pergunta se quer prosseguir em adicionar participantes
 
-            marcar.indicaDisponibilidadeDe(listaParticipantes.get(i),dataInicialParticipantes, dataFinalParticipantes);
-
-            //Teste de verificação
-            System.out.println("Digite 0 caso queira prosseguir em adicionar datas ou 1 caso queira encerrar");
-            i++;
-            int teste = scanner.nextInt();
-            if(teste == 1){
-                verificacao = false;
-            }
-
+            marcar.indicaDisponibilidadeDe(listaParticipantes.get(k),dataInicialParticipantes, dataFinalParticipantes);
         }
-        /* ************************************************************************************ */
-
         /* Passando as datas para o MarcadorDeReunião e mostrando resultados */
         marcar.marcarReuniaoEntre(dataInicialMonitor,dataFinalMonitor,participantes);
-        System.out.println("Resultados: ");
 
         /* ************************************************************************************ */
+
+        /*Criação de sala e reserva*/
+        boolean verificacao2 = true;
+        GerenciadorDeSalas sala = new GerenciadorDeSalas();
+        while(verificacao2){
+            System.out.println("=========== Reservas de Sala ===========");
+            System.out.println("                                        ");
+            System.out.println("[1] Adicionar chamada de sala");
+            System.out.println("[2] Remover chamada de sala");
+            System.out.println("[3] Mostrar todas as salas");
+            System.out.println("[4] Reservar chamada de sala");
+            System.out.println("[5] Cancelar reserva de chamada de sala");
+            System.out.println("[6] Ver reservas para sala");
+            System.out.println("[7] Ver reservas da sala");
+            System.out.println("[8] Sair do programa");
+            System.out.println("Digite o número do comando para prosseguir:");
+            String testee = scanner.nextLine();
+
+            switch(testee){
+                case "1":{//adicionarSalaChamada
+                    System.out.println("--------------- Adicionar sala -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Digite o nome da sala:");
+                    String nomeSala = scanner.next();
+                    System.out.println("Digite a capacidade requerida da sala:");
+                    int capacidadeSala = scanner.nextInt();
+                    System.out.println("Digite uma descrição para a sala:");
+                    String descricaoSala = scanner.next();
+                    sala.adicionaSalaChamada(nomeSala, capacidadeSala,descricaoSala);
+                    System.out.println("Sala adicionada");
+                    break;
+                }
+                case "2":{//removeSalaChamada
+                    System.out.println("--------------- Remover sala -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Digite a chamada da sala que quer ser removida");
+                    String nomeSalaRemovida = scanner.next();
+                    sala.removeSalaChamada(nomeSalaRemovida);
+                    System.out.println("Sala removida");
+                    break;
+                }
+                case "3":{//listaDeSalas
+                    System.out.println("--------------- Lista de salas -----------");
+                    System.out.println("                                                   ");
+                    System.out.println(sala.listaDeSalas());
+                    break;
+                }
+                case "4":{//reservaSalaChamada
+                    System.out.println("--------------- Reserva Sala Chamada-----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Digite o nome da sala: ");
+                    String nomeReserva = scanner.next();
+                    System.out.println("Digite a data inicial da reserva: ");
+                    //Data de disponibilidade
+                    System.out.println("Digite a data que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
+                    dataInicialScanner = scanner.next();
+                    dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
+                    dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
+
+                    //Horário inicial disponivel
+                    System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto:segundo");
+                    String horaInicialScanner = scanner.next();
+                    DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
+                    dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
+                    System.out.println("Digite a data final da reserva: ");
+                    //Horário final disponível
+                    System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
+                    String horaFinalScanner = scanner.next();
+                    LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
+                    dataFinalParticipantes = LocalDateTime.of(dataInicial, horaFinalteste);
+
+                    sala.reservaSalaChamada(nomeReserva,dataInicialParticipantes,dataFinalParticipantes);
+                    break;
+                }
+                case "5":{//cancelaReserva
+                    System.out.println("--------------- Cancelar Reserva -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Digite o nome da reserva: ");
+                    String reservasSala = scanner.next();
+
+                    //sala.cancelaReserva();
+                    break;
+                }
+                case "6":{//reservasParaSala
+                    System.out.println("--------------- Reservas para Sala -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Digite o nome da reserva: ");
+                    String reservasSala = scanner.next();
+                    sala.reservasParaSala(reservasSala);
+                    System.out.print("Sala reservada");
+                    break;
+                }
+                case "7":{//imprimeReservasDaSala
+                    System.out.println("--------------- Imprimir Reservas da Sala -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Digite o nome da sala que quer ser vistas as reservas: ");
+                    String reservasDaSala = scanner.next();
+                    sala.imprimeReservasDaSala(reservasDaSala);
+                    break;
+                }
+                case "8":{//Finalizar programa
+                    System.out.println("--------------- Finalização Programa -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Obrigado por utilizar nosso sistema");
+                    verificacao2 = false;
+                    break;
+                }
+            }
+        }
+
+
+        }
+
+
 
     }
 
-}
+
