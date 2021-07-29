@@ -92,14 +92,19 @@ public class GerenciadorDeSalas
 
     public void imprimeReservasDaSala(String nomeSala)
     {
-        Collection<Reserva> lc = reservasParaSala(nomeSala);
+        List<Reserva> lc = (List<Reserva>) reservasParaSala(nomeSala);
 
         Iterator i = lc.iterator();
-
+        System.out.println("A sala selecionada tem ");
         while(i.hasNext())
         {
-            System.out.println("reserva de indice i = "+i.toString());
-            System.out.println("");
+            System.out.print("reserva de indice i = "+i.toString());
+            System.out.println("dia: \t hora:");
+            Reserva tmp = (Reserva) i.next();
+            System.out.println(tmp.getInicio().getDayOfMonth()+"\t"+tmp.getInicio().getHour());
+            System.out.println("Reservada até: ");
+            System.out.println("dia: \t hora:");
+            System.out.println(tmp.getFim().getDayOfMonth()+"\t"+tmp.getFim().getHour());
         }
     }
 //----------metodos-privados-------------------------------
