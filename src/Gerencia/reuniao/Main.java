@@ -23,7 +23,7 @@ public class Main
         boolean verificacao = true;//variavel de verificação
         Scanner scanner = new Scanner(System.in); //criando scanner
         DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //formatando o tipo de data
-        /* *************************************************** */
+        /* ************************************************** */
 
         /* Parte do scanner da data inicial e final ditas pelo organizador*/
         System.out.println("Digite seu nome:");
@@ -32,9 +32,7 @@ public class Main
         System.out.println("Digite a data de inicio da reunião. Formato: dia/mês/ano");
         String dataInicialScanner = scanner.next();
 
-        /*
-        Verificador de datas iniciais
-         */
+        /*Verificador de datas iniciais*/
         LocalDate dataInicialteste = null;
         if(LocalDate.parse(dataInicialScanner, formatar).isBefore(agora)) {
             int tmp = 0;
@@ -57,9 +55,9 @@ public class Main
         dataInicialMonitor = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
         // -------------------------------------------------------------
 
-        /*
-        Verificador de datas finais
-         */
+
+        /*Verificador de datas finais*/
+
 
         System.out.println("Digite a data que quer fechar a reunião. Formato: dia/mês/ano");
         LocalDate dataFinalteste = null;
