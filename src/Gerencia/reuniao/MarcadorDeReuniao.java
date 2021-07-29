@@ -46,8 +46,8 @@ public class MarcadorDeReuniao
             System.out.print(listaParticipantes.get(i).getFim().getDayOfMonth() +"/");
             System.out.print(listaParticipantes.get(i).getFim().getMonthValue()+"/");
             System.out.print(listaParticipantes.get(i).getFim().getYear()+" entre ");
-            System.out.print(listaParticipantes.get(i).getInicio().getHour()+":"+ listaParticipantes.get(i).getInicio().getMinute()+"0 e ");
-            System.out.println(listaParticipantes.get(i).getFim().getHour()+":"+ listaParticipantes.get(i).getFim().getMinute()+"0 ");
+            System.out.print(listaParticipantes.get(i).getInicio().getHour()+":"+ listaParticipantes.get(i).getInicio().getMinute()+" e ");
+            System.out.println(listaParticipantes.get(i).getFim().getHour()+":"+ listaParticipantes.get(i).getFim().getMinute()+" ");
             System.out.println("                                                   ");
         }
     }
