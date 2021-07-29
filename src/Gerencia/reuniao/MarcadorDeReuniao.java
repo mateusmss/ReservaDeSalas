@@ -17,42 +17,13 @@ public class MarcadorDeReuniao
         LocalDateTime localDateInicial = dataInicial.atTime(00,00,00);
         LocalDateTime localDateFinal = dataFinal.atTime(23,59, 59);
 
-        /* Verificação se as datas requeridas estão no intervalo de datas pré definidas*/
-        for(int i = 0; i < listaParticipantes.size();i++){
-            if(localDateInicial.isBefore(listaParticipantes.get(i).getInicio())){
-                System.out.println("A data da reserva requerida é anterior a marcada");
-                listaNaoDisponiveis.add(listaParticipantes.get(i));
-            }
-            /*Verificação se a data do candidato passa a pré escolhida*/
 
+        for(int j = 0;j < listaParticipantes.size();j++){
+            int frequency = Collections.frequency(listaParticipantes, listaParticipantes.get(j).getInicio());
+            System.out.println(listaParticipantes.get(j).getInicio());
+            System.out.println(frequency);
         }
-        for(int i = 0;i < listaParticipantes.size();i++){
-            if(localDateFinal.isAfter(listaParticipantes.get(i).getFim())){
-                System.out.println("A data da reserva requerida é posterior a marcada");
-                listaNaoDisponiveis.add(listaParticipantes.get(i));
-            }
-        }
-        listaParticipantes.removeAll(listaNaoDisponiveis);
 
-        /*Verificação se as datas de inicio e fim dos participantes são comitentes ---> falta finalizar pra acabar essa parte*/
-        for(int k = 0;k < listaParticipantes.size();k++){
-            try{
-                    if(listaParticipantes.get(k).getInicio() ==  listaParticipantes.get(k + 1).getInicio()){
-
-                        //Verificador de quantidade de salas if(){}
-                        System.out.println("Datas conflitantes entre" + listaParticipantes.get(k).getParticipante() +" e " +  listaParticipantes.get(k+1).getParticipante());
-                        listaNaoDisponiveis.add(listaParticipantes.get(k));
-
-                }else if(listaParticipantes.get(k).getFim().equals(listaParticipantes.get(k+1).getFim())){
-                    //Verificador de quantidade de salas if(){}
-                      System.out.println("Datas conflitantes entre" + listaParticipantes.get(k).getParticipante() +" e " +  listaParticipantes.get(k-1).getParticipante());
-                      listaNaoDisponiveis.add(listaParticipantes.get(k));
-            }
-        }catch(Exception e){
-                break;
-            }
-   
-        }
         mostraSobreposicao();
     }
 //--------------------------------------------------------------------------
@@ -72,6 +43,5 @@ public class MarcadorDeReuniao
             System.out.println(listaParticipantes.get(i).getInicio());
             System.out.println(listaParticipantes.get(i).getFim());
         }
-
     }
 }
