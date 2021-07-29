@@ -86,35 +86,53 @@ public class Main
 
         /*Organizador insere os emails dos participantes*/
         System.out.println("=========== Cadastro de participantes ===========");
+        int count = 0;
         while(verificacao){
             System.out.println("[1] Cadastrar participantes ");
             System.out.println("[2] Finalizar cadastro de participantes");
-            int teste = scanner.nextInt();
-            int count = 0;
-            if(teste == 1){
-                try{
-                    System.out.println("Digite os participantes por endereço de email: ");
-                    nome = scanner.next();
-                    while (nome.contains("@") != true){
+            System.out.println("[3] Encerrar programa");
+            String teste = scanner.next();
+            switch (teste){
+                case "1":{
+                    try{
+                        System.out.println("Digite os participantes por endereço de email: ");
+                        nome = scanner.next();
+                        while (nome.contains("@") != true){
+                            System.out.println("--------------- Problema Encontrado -----------");
+                            System.out.println("                                                   ");
+                            System.out.println("Digite um email válido: ");
+                            nome = scanner.next();
+                            count++;
+                            if(count == 3){
+                                throw new Exception();
+                            }
+                        }
+                        listaParticipantes.add(nome);
+                        System.out.println("Email cadastrado!");
+                        break;
+                    }catch(Exception e){
                         System.out.println("--------------- Problema Encontrado -----------");
                         System.out.println("                                                   ");
-                        System.out.println("Digite um email válido: ");
-                        nome = scanner.next();
-                        count++;
-                        if(count == 3){
-                            throw new Exception();
-                        }
+                        System.out.println("Encerramento do programa ");
+                        System.exit(0);
                     }
-                    listaParticipantes.add(nome);
-                }catch(Exception e){
-                    System.out.println("--------------- Problema Encontrado -----------");
+                }
+                case "2":{
+                    if(listaParticipantes.size() == 0){
+                        System.out.println("--------------- Problema Encontrado -----------");
+                        System.out.println("Digite no minimo 1 participante para continuar o programa");
+                        System.out.println("                                                   ");
+                        break;
+                    }
+                    verificacao = false;
+                    break;
+                }
+                case "3":{
+                    System.out.println("--------------- Encerramento Programa -----------");
                     System.out.println("                                                   ");
                     System.out.println("Encerramento do programa ");
                     System.exit(0);
                 }
-            }
-            if(teste == 2){
-                verificacao = false;
             }
         }
         /* ******************************************************************************************* */
@@ -162,18 +180,32 @@ public class Main
                         System.out.println("                                                   ");
                         System.out.println("Horário inicial é posterior ao horário final. Horário não computado");
                     }
-                    if (!dataInicial.isAfter(dataFinal) && !horaInicialteste.isAfter(horaFinalteste)){
+                    if(dataInicialMonitor.isAfter(dataInicial) || dataFinalMonitor.isBefore(dataFinal)){
+                        System.out.println("--------------- Problema Encontrado -----------");
+                        System.out.println("                                                   ");
+                        System.out.println("Data não condizente com as datas escolhidas pelo administrados. Data não computada");
+                        System.out.print("O intervalo de marcação de possíveis é: " +dataInicialMonitor.getDayOfMonth()+ "/" +dataInicialMonitor.getMonthValue() +"/" + dataInicialMonitor.getYear());
+                        System.out.println(" e " +dataFinalMonitor.getDayOfMonth()+ "/" +dataFinalMonitor.getMonthValue() +"/" + dataFinalMonitor.getYear() );
+                    }
+                    if (!dataInicial.isAfter(dataFinal) && !horaInicialteste.isAfter(horaFinalteste) && !dataInicialMonitor.isBefore(dataInicial) && !dataFinalMonitor.isAfter(dataFinal)){
                         dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
                         dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
                         break;
                     }
+
                     count2++;
                     if(count2 == 3){
-                        throw new Exception();
+                        IllegalArgumentException erro = new IllegalArgumentException();
+                        throw erro;
                     }
                 }
 
-            }catch(Exception e){
+            }catch(NullPointerException e){
+                System.out.println("--------------- Problema Encontrado -----------");
+                System.out.println("                                                   ");
+                break;
+            }
+            catch(IllegalArgumentException erro){
                 System.out.println("--------------- Problema Encontrado -----------");
                 System.out.println("                                                   ");
                 System.out.println("Encerramento do programa");
@@ -192,8 +224,12 @@ public class Main
         /*Criação de sala e reserva*/
         boolean verificacao2 = true;
         GerenciadorDeSalas sala = new GerenciadorDeSalas();
+        try { Thread.sleep (3000); }
+        catch (InterruptedException ex) {
+            System.out.println("erro");
+        }
+        String testee;
         while(verificacao2){
-            try { Thread.sleep (5000); } catch (InterruptedException ex) {}
             System.out.println("=========== Reservas de Sala ===========");
             System.out.println("                                        ");
             System.out.println("[1] Adicionar chamada de sala");
@@ -205,7 +241,7 @@ public class Main
             System.out.println("[7] Ver reservas da sala");
             System.out.println("[8] Sair do programa");
             System.out.println("Digite o número do comando para prosseguir:");
-            String testee = scanner.nextLine();
+            testee = scanner.next();
 
             switch(testee){
                 case "1":{//adicionarSalaChamada
