@@ -95,11 +95,11 @@ public class GerenciadorDeSalas
         Collection<Reserva> lc = reservasParaSala(nomeSala);
 
         Iterator i = lc.iterator();
-        
+
         while(i.hasNext())
         {
             System.out.println("reserva de indice i = "+i.toString());
-            System.out.println("")
+            System.out.println("");
         }
     }
 //----------metodos-privados-------------------------------

@@ -6,15 +6,16 @@ public class MarcadorDeReuniao
 {
     //Construtor
 
-    List<Participantes> listaParticipantes = new ArrayList<>();
-    List<Participantes> listaNaoDisponiveis = new ArrayList<>();
-    List<Participantes> listaDisponiveis = new ArrayList<>();
-
+    private List<Participantes> listaParticipantes = new ArrayList<>();
+    private List<String> nomes = new ArrayList<>();
+    private LocalDate dataInicial;
+    private LocalDate dataFinal;
     //--------------------------------------------------------------------------
     public void marcarReuniaoEntre(LocalDate dataInicial, LocalDate dataFinal, Collection<String> listaDeParticipantes)
     {
-        System.out.println("A reunião pode ser marcada entre" +dataInicial+ " e " +dataFinal);
-        System.out.println("Os possíveis participantes são: " +listaDeParticipantes);
+        nomes.addAll(listaDeParticipantes);
+        this.dataInicial = dataInicial;
+        this.dataFinal = dataFinal;
         mostraSobreposicao();
     }
 //--------------------------------------------------------------------------
@@ -28,11 +29,26 @@ public class MarcadorDeReuniao
 //--------------------------------------------------------------------------
 
     public void mostraSobreposicao(){
-        System.out.println("Os participantes que poderão participar com seus respectivos horários: ");
+        System.out.println("=========== Relatório de Participantes ===========");
+        System.out.println("                                                   ");
+        System.out.println("--------------- Intervalos da Reunião -----------");
+        System.out.print("O intervalo de marcação de possíveis é: " +this.dataInicial.getDayOfMonth()+ "/" +this.dataInicial.getMonthValue() +"/" + this.dataInicial.getYear());
+        System.out.println(" e " +this.dataFinal.getDayOfMonth()+ "/" +this.dataFinal.getMonthValue() +"/" + this.dataFinal.getYear() );
+        System.out.println("                                                   ");
+        System.out.println("--------------- Informações Detalhadas -----------");
+        System.out.println("                                                   ");
+
         for(int i = 0;i <listaParticipantes.size();i++){
-            System.out.println("O participante"+listaParticipantes.get(i).getParticipante()+"pode se reunir entre os dias: ");
-            System.out.println(listaParticipantes.get(i).getInicio());
-            System.out.println(listaParticipantes.get(i).getFim());
+            System.out.print("O participante com email: "+listaParticipantes.get(i).getParticipante()+" tem preferencia pelas seguintes datas: ");
+            System.out.print(listaParticipantes.get(i).getInicio().getDayOfMonth() +"/");
+            System.out.print(listaParticipantes.get(i).getInicio().getMonthValue()+"/");
+            System.out.print(listaParticipantes.get(i).getInicio().getYear()+" e ");
+            System.out.print(listaParticipantes.get(i).getFim().getDayOfMonth() +"/");
+            System.out.print(listaParticipantes.get(i).getFim().getMonthValue()+"/");
+            System.out.print(listaParticipantes.get(i).getFim().getYear()+" entre ");
+            System.out.print(listaParticipantes.get(i).getInicio().getHour()+":"+ listaParticipantes.get(i).getInicio().getMinute()+"0 e ");
+            System.out.println(listaParticipantes.get(i).getFim().getHour()+":"+ listaParticipantes.get(i).getFim().getMinute()+"0 ");
+            System.out.println("                                                   ");
         }
     }
 }
