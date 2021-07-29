@@ -187,7 +187,7 @@ public class Main
                         System.out.print("O intervalo de marcação de possíveis é: " +dataInicialMonitor.getDayOfMonth()+ "/" +dataInicialMonitor.getMonthValue() +"/" + dataInicialMonitor.getYear());
                         System.out.println(" e " +dataFinalMonitor.getDayOfMonth()+ "/" +dataFinalMonitor.getMonthValue() +"/" + dataFinalMonitor.getYear() );
                     }
-                    if (!dataInicial.isAfter(dataFinal) && !horaInicialteste.isAfter(horaFinalteste) && !dataInicialMonitor.isBefore(dataInicial) && !dataFinalMonitor.isAfter(dataFinal)){
+                    if (!dataInicial.isAfter(dataFinal) && !horaInicialteste.isAfter(horaFinalteste) && !dataInicialMonitor.isAfter(dataInicial) && !dataFinalMonitor.isBefore(dataFinal)){
                         dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
                         dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
                         break;
