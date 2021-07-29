@@ -2,16 +2,19 @@ package Gerencia.reuniao;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Participantes implements Comparable<Participantes>{
-    String idParticipante;
-    LocalDateTime inicio, fim;
+    private String idParticipante;
+    private LocalDateTime inicio, fim;
+    private UUID id;
 
     public Participantes(LocalDateTime inicio, LocalDateTime fim, String participante)
     {
         this.idParticipante = participante;
         this.inicio = inicio;
         this.fim = fim;
+        this.id = UUID.randomUUID();
     }
     
     public LocalDateTime getInicio(){
@@ -30,6 +33,8 @@ public class Participantes implements Comparable<Participantes>{
         int valor = inicio.compareTo(o.inicio);
         return (valor != 0 ? valor : 1);
     }
+    
+    public UUID getUUID(){ return this.id; }
     
 
 
