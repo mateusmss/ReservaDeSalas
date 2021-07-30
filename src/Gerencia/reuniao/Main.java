@@ -228,8 +228,13 @@ public class Main
         catch (InterruptedException ex) {
             System.out.println("erro");
         }
+
+        //scanner.close();
+
+
         String testee;
         while(verificacao2){
+            Scanner escan = new Scanner(System.in).useDelimiter("\n");
             System.out.println("=========== Reservas de Sala ===========");
             System.out.println("                                        ");
             System.out.println("[1] Adicionar chamada de sala");
@@ -241,18 +246,21 @@ public class Main
             System.out.println("[7] Ver reservas da sala");
             System.out.println("[8] Sair do programa");
             System.out.println("Digite o número do comando para prosseguir:");
-            testee = scanner.next();
+            testee = escan.next();
+
+
+
 
             switch(testee){
                 case "1":{//adicionarSalaChamada
                     System.out.println("--------------- Adicionar sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala:");
-                    String nomeSala = scanner.nextLine();
+                    String nomeSala = escan.next();
                     System.out.println("Digite a capacidade requerida da sala:");
-                    int capacidadeSala = scanner.nextInt();
+                    int capacidadeSala = escan.nextInt();
                     System.out.println("Digite uma descrição para a sala:");
-                    String descricaoSala = scanner.nextLine();
+                    String descricaoSala = escan.next();
                     sala.adicionaSalaChamada(nomeSala, capacidadeSala,descricaoSala);
                     System.out.println("Sala adicionada");
                     break;
@@ -261,7 +269,7 @@ public class Main
                     System.out.println("--------------- Remover sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite a chamada da sala que quer ser removida");
-                    String nomeSalaRemovida = scanner.nextLine();
+                    String nomeSalaRemovida = escan.next();
                     sala.removeSalaChamada(nomeSalaRemovida);
                     System.out.println("Sala removida");
                     break;
@@ -276,24 +284,24 @@ public class Main
                     System.out.println("--------------- Reserva Sala Chamada-----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala: ");
-                    String nomeReserva = scanner.nextLine();
+                    String nomeReserva = escan.next();
                     System.out.println("Digite a data inicial da reserva: ");
                     //Data de disponibilidade
                     System.out.println("Digite a data que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
-                    dataInicialScanner = scanner.next();
+                    dataInicialScanner = escan.next();
                     dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
                     dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
                     //Horário inicial disponivel
                     System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto:segundo");
-                    String horaInicialScanner = scanner.next();
+                    String horaInicialScanner = escan.next();
                     DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
                     LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
                     dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
                     System.out.println("Digite a data final da reserva: ");
                     //Horário final disponível
                     System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
-                    String horaFinalScanner = scanner.next();
+                    String horaFinalScanner = escan.next();
                     LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
                     dataFinalParticipantes = LocalDateTime.of(dataInicial, horaFinalteste);
 
@@ -304,7 +312,7 @@ public class Main
                     System.out.println("--------------- Cancelar Reserva -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da reserva: ");
-                    String reservasSala = scanner.nextLine();
+                    String reservasSala = escan.next();
 
                     //sala.cancelaReserva();
                     break;
@@ -313,7 +321,7 @@ public class Main
                     System.out.println("--------------- Reservas para Sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala: ");
-                    String reservasSala = scanner.nextLine();
+                    String reservasSala = escan.next();
                     sala.imprimeReservasDaSala(reservasSala);
                     //System.out.print("Sala reservada");
                     break;
@@ -322,7 +330,7 @@ public class Main
                     System.out.println("--------------- Imprimir Reservas da Sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala que quer ser vistas as reservas: ");
-                    String reservasDaSala = scanner.nextLine();
+                    String reservasDaSala = escan.next();
                     sala.imprimeReservasDaSala(reservasDaSala);
                     break;
                 }

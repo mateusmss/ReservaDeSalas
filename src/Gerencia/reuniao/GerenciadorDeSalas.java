@@ -124,22 +124,23 @@ public class GerenciadorDeSalas
 
         }finally {
             lc = (List<Reserva>) reservasParaSala(nomeSala);
+            int iInt = 0;
         }
 
 
-
+        int iInt = 0;
         Iterator<Reserva> i = lc.iterator();
         System.out.println("A sala selecionada tem ");
-        while(i.hasNext())
-        {
+        do{
             System.out.print("reserva de indice i = "+ i);
             System.out.println("dia: \t hora:");
-            Reserva tmp = i.next();
+            Reserva tmp = lc.get(iInt);
             System.out.println(tmp.getInicio().getDayOfMonth()+"\t"+tmp.getInicio().getHour());
             System.out.println("Reservada até: ");
             System.out.println("dia: \t hora:");
             System.out.println(tmp.getFim().getDayOfMonth()+"\t"+tmp.getFim().getHour());
-        }
+            iInt++;
+        }while (i.hasNext());
     }
 //----------metodos-privados-------------------------------
     private boolean checarPresense(Sala sala)
