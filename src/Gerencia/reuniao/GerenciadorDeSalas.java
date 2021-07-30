@@ -92,15 +92,49 @@ public class GerenciadorDeSalas
 
     public void imprimeReservasDaSala(String nomeSala)
     {
-        List<Reserva> lc = (List<Reserva>) reservasParaSala(nomeSala);
+        List<Reserva> lc;
+        try {
+            lc = (List<Reserva>) reservasParaSala(nomeSala);
+            Iterator<Reserva> i = lc.iterator();
+        }catch (RuntimeException e)
+        { Scanner s = new Scanner(System.in);
 
-        Iterator i = lc.iterator();
+            System.out.println("A sala selecionada não existe!");
+            System.out.println("Gostaria de adicionala? 1 para adiciona-la, 0 para voltar às opções");
+
+            int capacidade, op = s.nextInt();
+            String descricao;
+
+            System.out.println("Digite a capacidade requerida da sala:");
+            capacidade = s.nextInt();
+
+            System.out.println("Digite uma descrição para a sala:");
+
+            descricao = s.next();
+
+            if(op == 0)
+                return;
+            else if(op == 1)
+                adicionaSalaChamada(nomeSala, capacidade, descricao);
+            else{ s.close(); throw new IllegalArgumentException("Nem 1 nem 0, assim não dá!"); }
+
+            s.close();
+
+
+
+        }finally {
+            lc = (List<Reserva>) reservasParaSala(nomeSala);
+        }
+
+
+
+        Iterator<Reserva> i = lc.iterator();
         System.out.println("A sala selecionada tem ");
         while(i.hasNext())
         {
-            System.out.print("reserva de indice i = "+i.toString());
+            System.out.print("reserva de indice i = "+ i);
             System.out.println("dia: \t hora:");
-            Reserva tmp = (Reserva) i.next();
+            Reserva tmp = i.next();
             System.out.println(tmp.getInicio().getDayOfMonth()+"\t"+tmp.getInicio().getHour());
             System.out.println("Reservada até: ");
             System.out.println("dia: \t hora:");
@@ -112,8 +146,10 @@ public class GerenciadorDeSalas
     { boolean truth = false;
 
         for(Sala s : listaDeSalas)
-            if(s.getNome().equals(sala.getNome()))
+            if (s.getNome().equals(sala.getNome())) {
                 truth = true;
+                break;
+            }
 
         return truth;
     }

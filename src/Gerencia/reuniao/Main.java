@@ -248,11 +248,11 @@ public class Main
                     System.out.println("--------------- Adicionar sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala:");
-                    String nomeSala = scanner.next();
+                    String nomeSala = scanner.nextLine();
                     System.out.println("Digite a capacidade requerida da sala:");
                     int capacidadeSala = scanner.nextInt();
                     System.out.println("Digite uma descrição para a sala:");
-                    String descricaoSala = scanner.next();
+                    String descricaoSala = scanner.nextLine();
                     sala.adicionaSalaChamada(nomeSala, capacidadeSala,descricaoSala);
                     System.out.println("Sala adicionada");
                     break;
@@ -261,7 +261,7 @@ public class Main
                     System.out.println("--------------- Remover sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite a chamada da sala que quer ser removida");
-                    String nomeSalaRemovida = scanner.next();
+                    String nomeSalaRemovida = scanner.nextLine();
                     sala.removeSalaChamada(nomeSalaRemovida);
                     System.out.println("Sala removida");
                     break;
@@ -276,7 +276,7 @@ public class Main
                     System.out.println("--------------- Reserva Sala Chamada-----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala: ");
-                    String nomeReserva = scanner.next();
+                    String nomeReserva = scanner.nextLine();
                     System.out.println("Digite a data inicial da reserva: ");
                     //Data de disponibilidade
                     System.out.println("Digite a data que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
@@ -304,7 +304,7 @@ public class Main
                     System.out.println("--------------- Cancelar Reserva -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da reserva: ");
-                    String reservasSala = scanner.next();
+                    String reservasSala = scanner.nextLine();
 
                     //sala.cancelaReserva();
                     break;
@@ -312,17 +312,17 @@ public class Main
                 case "6":{//reservasParaSala
                     System.out.println("--------------- Reservas para Sala -----------");
                     System.out.println("                                                   ");
-                    System.out.println("Digite o nome da reserva: ");
-                    String reservasSala = scanner.next();
-                    sala.reservasParaSala(reservasSala);
-                    System.out.print("Sala reservada");
+                    System.out.println("Digite o nome da sala: ");
+                    String reservasSala = scanner.nextLine();
+                    sala.imprimeReservasDaSala(reservasSala);
+                    //System.out.print("Sala reservada");
                     break;
                 }
                 case "7":{//imprimeReservasDaSala
                     System.out.println("--------------- Imprimir Reservas da Sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala que quer ser vistas as reservas: ");
-                    String reservasDaSala = scanner.next();
+                    String reservasDaSala = scanner.nextLine();
                     sala.imprimeReservasDaSala(reservasDaSala);
                     break;
                 }
