@@ -60,6 +60,7 @@ public class Sala
     public boolean isReservada(LocalDateTime inicio, LocalDateTime fim)
     { Reserva tmp = new Reserva(this, null);
 
+
         for(Reserva r : reservada)
             if(checkReserva(r, tmp))
             { return true; }
@@ -70,7 +71,9 @@ public class Sala
 
     public void setReservada(Reserva reserva){
         boolean ocupado = false;
-        for(Reserva r : reservada)
+        if(reservada.size() == 0)
+            reservada.add(reserva);
+        else for(Reserva r : reservada)
         {
             if(checkReserva(r, reserva))
             {
@@ -79,6 +82,7 @@ public class Sala
             }
             reservada.add(reserva);
         } }
+
 
     public Collection<Reserva> getListaReservada()
     {
