@@ -7,6 +7,8 @@ import java.time.*;
 public class Main
 {
     public static void main(String args[]){
+        UniversalInput ui = new UniversalInput();
+
         /* Criação de variáveis e lista*/
         List<String> listaParticipantes = new ArrayList<>();
         //private static List<Participantes> listaAux;
@@ -148,9 +150,11 @@ public class Main
                     System.out.println("Olá, " +listaParticipantes.get(k));
                     //Data de disponibilidade
                     System.out.println("Digite a data de inicio que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
-                    dataInicialScanner = scanner.next();
+                    /*dataInicialScanner = scanner.next();
                     dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
-                    dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
+                    dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());*/
+
+                    dataInicial = ui.escan_Data(formatar, "dia/mês/ano");
 
                     System.out.println("Digite a data final que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
                     dataFinalScanner = scanner.next();

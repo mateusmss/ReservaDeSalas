@@ -15,7 +15,10 @@ public class UniversalInput
         escan = new Scanner(System.in).useDelimiter("\n");
         tratar = new tratamento_Excesao();
     }
-
+    /*
+    A FAZER: Metodos adicionais para leituras que não se encaixe em nenhum dos metodos abaixo
+             Implementar os manejos de erros adequados na subclasse tratamento_Excesao
+     */
 
     public String escan_Nome()
     {
@@ -49,7 +52,7 @@ public class UniversalInput
     }
 
 
-    public LocalDate escan_Data(DateTimeFormatter formatter)
+    public LocalDate escan_Data(DateTimeFormatter formatter, String complemento_ErrorMessage)
     { String data = "";
         LocalDate dataTeste;
         LocalDate dataReturn;
@@ -64,7 +67,7 @@ public class UniversalInput
             int j = 0;
 
             do{
-                dataReturn = tratar.EscanDataException(formatter);
+                dataReturn = tratar.EscanDataException(formatter, complemento_ErrorMessage);
                 j++;
             }while (j < 3 && Objects.isNull(dataReturn));
             if(j > 2)
@@ -80,14 +83,14 @@ public class UniversalInput
     {
 
 
-        public LocalDate EscanDataException(DateTimeFormatter formatter)
+        public LocalDate EscanDataException(DateTimeFormatter formatter, String complemento)
         { String data = "";
             LocalDate dataTeste;
             LocalDate dataReturn;
 
             System.out.println("============ERRO=============\n");
             System.out.println("A data disponibilizada está formatada de maneira erronea!");
-            System.out.println("Tente utilizar o formato Dia/Mês/Ano");
+            System.out.println("Tente utilizar o formato "+complemento);
 
             try {
                 data = escan.next();
