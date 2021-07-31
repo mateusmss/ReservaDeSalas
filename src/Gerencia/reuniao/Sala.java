@@ -95,6 +95,7 @@ public class Sala
         System.out.println("Nome da sala: "+nome);
         System.out.println("Descrição: "+observacoes);
         System.out.println("Capacidade: "+capacidade);
+        System.out.println("/*-----*/");
     }
 
     public void printListaReserva()
@@ -107,7 +108,7 @@ public class Sala
 
         for(Reserva s : reservada)
         {
-
+            s.print();
         }
     }
 

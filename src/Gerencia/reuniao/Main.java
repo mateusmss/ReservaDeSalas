@@ -282,7 +282,10 @@ public class Main
                 case "3":{//listaDeSalas
                     System.out.println("--------------- Lista de salas -----------");
                     System.out.println("                                                   ");
-                    System.out.println(sala.listaDeSalas().toString());
+                    //System.out.println(sala.listaDeSalas().toString());
+
+                    sala.imprimeListaSalas();
+                    System.out.println();
                     break;
                 }
                 case "4":{//reservaSalaChamada

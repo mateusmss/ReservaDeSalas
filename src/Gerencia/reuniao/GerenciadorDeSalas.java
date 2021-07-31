@@ -90,7 +90,7 @@ public class GerenciadorDeSalas
         return null;
     }
 
-    public void imprimeReservasDaSala(String nomeSala)
+    /*public void imprimeReservasDaSala(String nomeSala)
     {
         List<Reserva> lc;
         try {
@@ -142,7 +142,43 @@ public class GerenciadorDeSalas
             iInt++;
             i.next();
         }
+    }*/
+
+
+    public void imprimeReservasDaSala(String nomeSala)
+    {
+        if(listaDeSalas.isEmpty()) {
+            System.out.println("Nenhuma sala cadastrada");
+            return;
+        }
+
+        for(Sala s : listaDeSalas)
+        {
+            if(s.getNome().equals(nomeSala))
+            { List<Reserva> lc = (List<Reserva>) reservasParaSala(nomeSala);
+
+                for(Reserva r : lc)
+                    r.print();
+                return;
+            } }
+
+        System.out.println("Sala não encontrada");
+        return;
     }
+
+    public void imprimeListaSalas() {
+        if(listaDeSalas.isEmpty()) {
+            System.out.println("Nenhuma sala cadastrada");
+            return;
+        }
+
+        for (Sala s : listaDeSalas)
+        {
+            s.printThisSala();
+        }
+    }
+
+
 //----------metodos-privados-------------------------------
     private boolean checarPresense(Sala sala)
     { boolean truth = false;
