@@ -1,5 +1,8 @@
 package Gerencia.reuniao;
 
+import org.jetbrains.annotations.Nullable;
+
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
@@ -79,6 +82,33 @@ public class UniversalInput
         return null;
     }
 
+    public LocalTime escan_Time()
+    {
+        String time;
+        DateTimeFormatter formatarHora;
+        LocalTime horaInicialteste;
+
+        try{
+            time = escan.next();
+            formatarHora = DateTimeFormatter.ofPattern("HH:mm");
+            horaInicialteste = LocalTime.parse(time, formatarHora);
+            return horaInicialteste;
+        }catch (Exception e)
+        { int j = 0;
+
+            do{
+                horaInicialteste = tratar.EscanHoraException();
+                j++;
+            }while (j < 3 && Objects.isNull(horaInicialteste));
+            if(j > 2)
+            {
+                System.out.println("O programa está finalizando devido à demasiadas entradas erroneas!");
+                System.exit(1);
+            }else return horaInicialteste; }
+
+        return null;
+    }
+
     private class tratamento_Excesao
     {
 
@@ -102,7 +132,26 @@ public class UniversalInput
                 return null;
             } }
 
+        public @Nullable
+        LocalTime EscanHoraException()
+        {
+            String time;
+            DateTimeFormatter formatarHora;
+            LocalTime horaInicialteste;
 
+            System.out.println("============ERRO=============\n");
+            System.out.println("A hora disponibilizada está formatada de maneira erronea!");
+            System.out.println("Tente utilizar o formato Hora:Minuto");
+
+            try {
+                time = escan.next();
+                formatarHora = DateTimeFormatter.ofPattern("HH:mm");
+                horaInicialteste = LocalTime.parse(time, formatarHora);
+                return horaInicialteste;
+            }catch (Exception e)
+            {
+                return null;
+            } }
 
     }
 }

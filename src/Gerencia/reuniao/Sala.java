@@ -89,6 +89,27 @@ public class Sala
         return this.reservada;
     }
 
+    public void printThisSala()
+    {
+        System.out.println("Informações sobre a sala:");
+        System.out.println("Nome da sala: "+nome);
+        System.out.println("Descrição: "+observacoes);
+        System.out.println("Capacidade: "+capacidade);
+    }
+
+    public void printListaReserva()
+    {
+        if(reservada.isEmpty()) {
+            System.out.println("A sala não está reservada!");
+            return;
+        }
+
+
+        for(Reserva s : reservada)
+        {
+
+        }
+    }
 
 //----------------metodos-privados----------------
 

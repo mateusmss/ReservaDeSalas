@@ -42,6 +42,14 @@ public class Reserva
     public LocalDateTime getFim(){ return fim; }
     public UUID getUUID(){ return this.id; }
 
+    public void print()
+    {
+        System.out.println("Sala reservada entre os dias "+inicio.getDayOfMonth()+"/"+inicio.getMonth());
+        System.out.print(" e "+fim.getDayOfMonth()+"/"+fim.getMonth());
+
+        System.out.println("entre os horarios: "+inicio.getHour()+":"+inicio.getMinute());
+        System.out.print(" e "+fim.getHour()+":"+fim.getMinute());
+    }
 
 
 }
