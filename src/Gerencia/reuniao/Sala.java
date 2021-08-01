@@ -48,8 +48,18 @@ public class Sala
     
     public boolean isReservada(LocalDateTime inicio, LocalDateTime fim)
     { Reserva tmp = new Reserva(this, null);
+        tmp.setInicio(inicio);
+        tmp.setFim(fim);
 
+        if(reservada.isEmpty())
+            return false;
 
+        if(reservada.size() == 1)
+        {
+            if(checkReserva(reservada.get(0), tmp))
+            { return true; }
+            else return false;
+        }
         for(Reserva r : reservada)
             if(checkReserva(r, tmp))
             { return true; }
@@ -60,8 +70,13 @@ public class Sala
 
     public void setReservada(Reserva reserva){
         boolean ocupado = false;
-        if(reservada.size() == 0)
+        if(reservada.size() == 0) {
             reservada.add(reserva);
+            System.out.println("\nTudo certo, Reserva confirmada!");
+            System.out.println("Por favor, anote o identificador de sua reserva:\t"+reserva.getUUID().toString());
+
+            System.out.println("\nVoce precisará desse identificador para cancelar sua reserva!");
+        }
         else for(Reserva r : reservada)
         {
             if(checkReserva(r, reserva))

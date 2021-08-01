@@ -285,8 +285,8 @@ public class Main
                     String nomeReserva = escan.next();
                     System.out.println("Digite a data da reserva. Formato: dia/mês/ano ");
                     //Data de disponibilidade
-                    dataInicialScanner = escan.next();
-                    dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
+                    //dataInicialScanner = escan.next();
+                    dataInicialteste = ui.escan_Data(formatar, "dia/mês/ano");
                     dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
                     //Horário inicial disponivel
@@ -303,6 +303,10 @@ public class Main
 
                     sala.reservaSalaChamada(nomeReserva,dataInicialParticipantes,dataFinalParticipantes);
 
+                    try { Thread.sleep (3000); }
+                    catch (InterruptedException ex) {
+                        System.out.println("erro");
+                    }
 
                     break;
                 }
