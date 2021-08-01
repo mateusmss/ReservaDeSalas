@@ -22,14 +22,6 @@ public class UniversalInput
              Implementar os manejos de erros adequados na subclasse tratamento_Excesao
      */
 
-    public String escan_Nome()
-    {
-        String nome;
-        nome = escan.next();
-
-        return nome;
-    }
-
     public int escan_escolha()
     { int i, j = 0;
         do {
@@ -46,30 +38,6 @@ public class UniversalInput
         }
         return -1;
     }
-
-    public String escan_Email()
-    { String nome = "";
-
-        try {
-
-            nome = escan.next();
-            while (!nome.contains("@") || nome.contains(" ")) {
-                System.out.println("Por favor, escreva um email valido!");
-                System.out.println("\ttente algo começando com @ e que não contenha espaços");
-
-                nome = escan.next();
-                return nome;
-            }
-        }catch (Exception e)
-        {
-            System.out.println("==================ERRO==================\n");
-            System.out.println("Problemas encontrados, terminando a execução do programa!");
-            System.exit(1);
-        }
-
-        return null;
-    }
-
 
     public LocalDate escan_Data(DateTimeFormatter formatter, String complemento_ErrorMessage)
     { String data = "";

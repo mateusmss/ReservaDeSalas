@@ -67,12 +67,13 @@ public class GerenciadorDeSalas
             if(s.getNome().equals(nomeDaSala))
             {
                 if(s.isReservada(dataInicial, dataFinal))
-                    System.out.println("A sala já está reservada!");
+                    System.out.println("Horario já ocupado, não foi possivel reserva-lo");
                 else {
                     Reserva reserva = new Reserva(s, null);
                     reserva.setInicio(dataInicial);
                     reserva.setFim(dataFinal);
                     s.setReservada(reserva);
+
                     return reserva;
         } } }
 

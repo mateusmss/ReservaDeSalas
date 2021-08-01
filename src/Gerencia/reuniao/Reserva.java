@@ -1,10 +1,9 @@
 package Gerencia.reuniao;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Random;
 import java.util.UUID;
+
 public class Reserva
 {
 
@@ -24,17 +23,6 @@ public class Reserva
     }
 
 //---------------------------------------------------------------
-    public void setSala(Sala sala){ this.sala = sala; }
-
-//---------------------------------------------------------------
-    public void setParticipantes(Collection<String> participantes)
-    { this.participantes = participantes; }
-
-//---------------------------------------------------------------
-    public Sala getSala(){ return sala; }
-
-//---------------------------------------------------------------
-    public Collection<String> getParticipantes(){ return participantes; }
     public void setInicio(LocalDateTime pInicio){ inicio = pInicio; }
     public void setFim(LocalDateTime pFim){ fim = pFim; }
     

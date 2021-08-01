@@ -11,9 +11,6 @@ public class Sala
     private String observacoes;
     private List<Reserva> reservada;
 
-    private LocalDateTime rInicio;
-    private LocalDateTime rFim;
-
     public Sala(String nome, int capacidade, String observacoes){
         this.nome = nome;
         this.capacidade = capacidade;
@@ -23,15 +20,7 @@ public class Sala
     public String getNome(){
         return this.nome;
     }
-    public String getLocal(){
-        return this.nome;
-    }
-    public int getCapacidade(){
-        return this.capacidade;
-    }
-    public String getObservacoes(){
-        return this.nome;
-    }
+
     public void liberar(Reserva r)
     {
         for(Reserva s : reservada)
@@ -59,8 +48,18 @@ public class Sala
     
     public boolean isReservada(LocalDateTime inicio, LocalDateTime fim)
     { Reserva tmp = new Reserva(this, null);
+        tmp.setInicio(inicio);
+        tmp.setFim(fim);
 
+        if(reservada.isEmpty())
+            return false;
 
+        if(reservada.size() == 1)
+        {
+            if(checkReserva(reservada.get(0), tmp))
+            { return true; }
+            else return false;
+        }
         for(Reserva r : reservada)
             if(checkReserva(r, tmp))
             { return true; }
@@ -71,8 +70,13 @@ public class Sala
 
     public void setReservada(Reserva reserva){
         boolean ocupado = false;
-        if(reservada.size() == 0)
+        if(reservada.size() == 0) {
             reservada.add(reserva);
+            System.out.println("\nTudo certo, Reserva confirmada!");
+            System.out.println("Por favor, anote o identificador de sua reserva:\t"+reserva.getUUID().toString());
+
+            System.out.println("\nVoce precisará desse identificador para cancelar sua reserva!");
+        }
         else for(Reserva r : reservada)
         {
             if(checkReserva(r, reserva))
@@ -101,20 +105,6 @@ public class Sala
         System.out.println("Descrição: "+observacoes);
         System.out.println("Capacidade: "+capacidade);
         System.out.println("/*-----*/");
-    }
-
-    public void printListaReserva()
-    {
-        if(reservada.isEmpty()) {
-            System.out.println("A sala não está reservada!");
-            return;
-        }
-
-
-        for(Reserva s : reservada)
-        {
-            s.print();
-        }
     }
 
 //----------------metodos-privados----------------
