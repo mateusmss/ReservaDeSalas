@@ -243,13 +243,12 @@ public class Main
             System.out.println("=========== Reservas de Sala ===========");
             System.out.println("                                        ");
             System.out.println("[1] Adicionar chamada de sala");
-            System.out.println("[2] Remover chamada de sala");
-            System.out.println("[3] Mostrar todas as salas");
-            System.out.println("[4] Reservar chamada de sala");
+            System.out.println("[2] Mostrar todas as salas");
+            System.out.println("[3] Reservar chamada de sala");
+            System.out.println("[4] Remover chamada de sala");
             System.out.println("[5] Cancelar reserva de chamada de sala");
             System.out.println("[6] Ver reservas para sala");
-            System.out.println("[7] Ver reservas da sala");
-            System.out.println("[8] Sair do programa");
+            System.out.println("[7] Sair do programa");
             System.out.println("Digite o número do comando para prosseguir:");
             testee = escan.next();
 
@@ -270,16 +269,7 @@ public class Main
                     System.out.println("Sala adicionada");
                     break;
                 }
-                case "2":{//removeSalaChamada
-                    System.out.println("--------------- Remover sala -----------");
-                    System.out.println("                                                   ");
-                    System.out.println("Digite a chamada da sala que quer ser removida");
-                    String nomeSalaRemovida = escan.next();
-                    sala.removeSalaChamada(nomeSalaRemovida);
-                    //System.out.println("Sala removida");
-                    break;
-                }
-                case "3":{//listaDeSalas
+                case "2":{//listaDeSalas
                     System.out.println("--------------- Lista de salas -----------");
                     System.out.println("                                                   ");
                     //System.out.println(sala.listaDeSalas().toString());
@@ -288,14 +278,13 @@ public class Main
                     System.out.println();
                     break;
                 }
-                case "4":{//reservaSalaChamada
+                case "3":{//reservaSalaChamada
                     System.out.println("--------------- Reserva Sala Chamada-----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala: ");
                     String nomeReserva = escan.next();
-                    System.out.println("Digite a data inicial da reserva: ");
+                    System.out.println("Digite a data da reserva. Formato: dia/mês/ano ");
                     //Data de disponibilidade
-                    System.out.println("Digite a data que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
                     dataInicialScanner = escan.next();
                     dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
                     dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
@@ -306,7 +295,6 @@ public class Main
                     DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
                     LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
                     dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
-                    System.out.println("Digite a data final da reserva: ");
                     //Horário final disponível
                     System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
                     String horaFinalScanner = escan.next();
@@ -314,6 +302,16 @@ public class Main
                     dataFinalParticipantes = LocalDateTime.of(dataInicial, horaFinalteste);
 
                     sala.reservaSalaChamada(nomeReserva,dataInicialParticipantes,dataFinalParticipantes);
+                    break;
+                }
+                case "4":{
+                    //removeSalaChamada
+                    System.out.println("--------------- Remover sala -----------");
+                    System.out.println("                                                   ");
+                    System.out.println("Digite a chamada da sala que quer ser removida");
+                    String nomeSalaRemovida = escan.next();
+                    sala.removeSalaChamada(nomeSalaRemovida);
+                    //System.out.println("Sala removida");
                     break;
                 }
                 case "5":{//cancelaReserva
@@ -327,16 +325,7 @@ public class Main
                     //sala.cancelaReserva();
                     break;
                 }
-                case "6":{//reservasParaSala
-                    System.out.println("--------------- Reservas para Sala -----------");
-                    System.out.println("                                                   ");
-                    System.out.println("Digite o nome da sala: ");
-                    String reservasSala = escan.next();
-                    sala.imprimeReservasDaSala(reservasSala);
-                    //System.out.print("Sala reservada");
-                    break;
-                }
-                case "7":{//imprimeReservasDaSala
+                case "6":{//imprimeReservasDaSala
                     System.out.println("--------------- Imprimir Reservas da Sala -----------");
                     System.out.println("                                                   ");
                     System.out.println("Digite o nome da sala que quer ser vistas as reservas: ");
@@ -344,13 +333,14 @@ public class Main
                     sala.imprimeReservasDaSala(reservasDaSala);
                     break;
                 }
-                case "8":{//Finalizar programa
+                case "7":{//Finalizar programa
                     System.out.println("--------------- Finalização Programa -----------");
                     System.out.println("                                                   ");
                     System.out.println("Obrigado por utilizar nosso sistema");
                     verificacao2 = false;
                     break;
                 }
+
             }
         }
         }

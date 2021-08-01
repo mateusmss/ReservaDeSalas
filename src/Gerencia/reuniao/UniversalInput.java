@@ -1,6 +1,5 @@
 package Gerencia.reuniao;
 
-import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -132,8 +131,7 @@ public class UniversalInput
                 return null;
             } }
 
-        public @Nullable
-        LocalTime EscanHoraException()
+        public LocalTime EscanHoraException()
         {
             String time;
             DateTimeFormatter formatarHora;
