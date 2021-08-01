@@ -60,6 +60,7 @@ public class Sala
     public boolean isReservada(LocalDateTime inicio, LocalDateTime fim)
     { Reserva tmp = new Reserva(this, null);
 
+
         for(Reserva r : reservada)
             if(checkReserva(r, tmp))
             { return true; }
@@ -70,7 +71,9 @@ public class Sala
 
     public void setReservada(Reserva reserva){
         boolean ocupado = false;
-        for(Reserva r : reservada)
+        if(reservada.size() == 0)
+            reservada.add(reserva);
+        else for(Reserva r : reservada)
         {
             if(checkReserva(r, reserva))
             {
@@ -80,11 +83,34 @@ public class Sala
             reservada.add(reserva);
         } }
 
+
     public Collection<Reserva> getListaReservada()
     {
         return this.reservada;
     }
 
+    public void printThisSala()
+    {
+        System.out.println("Informações sobre a sala:");
+        System.out.println("Nome da sala: "+nome);
+        System.out.println("Descrição: "+observacoes);
+        System.out.println("Capacidade: "+capacidade);
+        System.out.println("/*-----*/");
+    }
+
+    public void printListaReserva()
+    {
+        if(reservada.isEmpty()) {
+            System.out.println("A sala não está reservada!");
+            return;
+        }
+
+
+        for(Reserva s : reservada)
+        {
+            s.print();
+        }
+    }
 
 //----------------metodos-privados----------------
 

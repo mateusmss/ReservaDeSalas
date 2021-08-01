@@ -7,6 +7,8 @@ import java.time.*;
 public class Main
 {
     public static void main(String args[]){
+        UniversalInput ui = new UniversalInput();
+
         /* Criação de variáveis e lista*/
         List<String> listaParticipantes = new ArrayList<>();
         //private static List<Participantes> listaAux;
@@ -148,26 +150,29 @@ public class Main
                     System.out.println("Olá, " +listaParticipantes.get(k));
                     //Data de disponibilidade
                     System.out.println("Digite a data de inicio que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
-                    dataInicialScanner = scanner.next();
+                    /*dataInicialScanner = scanner.next();
                     dataInicialteste = LocalDate.parse(dataInicialScanner, formatar);
-                    dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
+                    dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());*/
+
+                    dataInicial = ui.escan_Data(formatar, "dia/mês/ano");
 
                     System.out.println("Digite a data final que você tem disponibilidade para a reunião. Formato: dia/mês/ano");
-                    dataFinalScanner = scanner.next();
+                    /*dataFinalScanner = scanner.next();
                     dataFinalteste = LocalDate.parse(dataFinalScanner, formatar);
-                    dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());
+                    dataFinal = LocalDate.of(dataFinalteste.getYear(),dataFinalteste.getMonth(),dataFinalteste.getDayOfMonth());*/
+                    dataFinal = ui.escan_Data(formatar, "dia/mês/ano");
 
                     //Horário inicial disponivel
                     System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto");
-                    String horaInicialScanner = scanner.next();
+                    /*String horaInicialScanner = scanner.next();*/
                     DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
-                    LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
+                    LocalTime horaInicialteste = ui.escan_Time();
 
 
                     //Horário final disponível
                     System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto");
-                    String horaFinalScanner = scanner.next();
-                    LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
+                    //String horaFinalScanner = scanner.next();
+                    LocalTime horaFinalteste = ui.escan_Time();
 
 
                     if(dataInicial.isAfter(dataFinal)){
@@ -277,7 +282,10 @@ public class Main
                 case "3":{//listaDeSalas
                     System.out.println("--------------- Lista de salas -----------");
                     System.out.println("                                                   ");
-                    System.out.println(sala.listaDeSalas());
+                    //System.out.println(sala.listaDeSalas().toString());
+
+                    sala.imprimeListaSalas();
+                    System.out.println();
                     break;
                 }
                 case "4":{//reservaSalaChamada
