@@ -11,9 +11,6 @@ public class Sala
     private String observacoes;
     private List<Reserva> reservada;
 
-    private LocalDateTime rInicio;
-    private LocalDateTime rFim;
-
     public Sala(String nome, int capacidade, String observacoes){
         this.nome = nome;
         this.capacidade = capacidade;
@@ -23,15 +20,7 @@ public class Sala
     public String getNome(){
         return this.nome;
     }
-    public String getLocal(){
-        return this.nome;
-    }
-    public int getCapacidade(){
-        return this.capacidade;
-    }
-    public String getObservacoes(){
-        return this.nome;
-    }
+
     public void liberar(Reserva r)
     {
         for(Reserva s : reservada)
@@ -101,20 +90,6 @@ public class Sala
         System.out.println("Descrição: "+observacoes);
         System.out.println("Capacidade: "+capacidade);
         System.out.println("/*-----*/");
-    }
-
-    public void printListaReserva()
-    {
-        if(reservada.isEmpty()) {
-            System.out.println("A sala não está reservada!");
-            return;
-        }
-
-
-        for(Reserva s : reservada)
-        {
-            s.print();
-        }
     }
 
 //----------------metodos-privados----------------
