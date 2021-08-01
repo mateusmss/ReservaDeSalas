@@ -302,6 +302,8 @@ public class Main
                     dataFinalParticipantes = LocalDateTime.of(dataInicial, horaFinalteste);
 
                     sala.reservaSalaChamada(nomeReserva,dataInicialParticipantes,dataFinalParticipantes);
+
+
                     break;
                 }
                 case "4":{
@@ -317,10 +319,15 @@ public class Main
                 case "5":{//cancelaReserva
                     System.out.println("--------------- Cancelar Reserva -----------");
                     System.out.println("                                                   ");
-                    System.out.println("Digite o nome da sala: ");
-                    String reservasSala = escan.next();
-                    System.out.println("Agora digite o horario da reserva");
-                    LocalTime lt = ui.escan_Time();
+                    System.out.println("Digite abaixo, o identificador de sua reserva: ");
+                    String identificador = escan.next();
+
+                    sala.cancelaReserva(identificador);
+
+                    try { Thread.sleep (3000); }
+                    catch (InterruptedException ex) {
+                        System.out.println("erro");
+                    }
 
                     //sala.cancelaReserva();
                     break;

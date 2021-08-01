@@ -30,6 +30,23 @@ public class UniversalInput
         return nome;
     }
 
+    public int escan_escolha()
+    { int i, j = 0;
+        do {
+            try {
+                i = escan.nextInt();
+                return i;
+            } catch (Exception e) { ;
+                System.out.println("Entrada invalida, coloque 1 para sim e 0 para não!");
+                j++;
+            } }while (j < 3);
+        if (j > 2) {
+            System.out.println("ERRO: demasiadas entradas erroneas!\nO programa será finalizado!");
+            System.exit(1);
+        }
+        return -1;
+    }
+
     public String escan_Email()
     { String nome = "";
 

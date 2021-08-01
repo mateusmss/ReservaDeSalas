@@ -1,16 +1,15 @@
 package Gerencia.reuniao;
+import javax.annotation.processing.SupportedSourceVersion;
 import java.util.*;
 import java.time.*;
 
 public class GerenciadorDeSalas
 {
     private List<Sala> listaDeSalas;
+    private UniversalInput ui;
 
     //Construtor
-    public GerenciadorDeSalas()
-    {
-        listaDeSalas = new ArrayList<>();
-    }
+    public GerenciadorDeSalas() { listaDeSalas = new ArrayList<>(); }
 
 //---------------------------------------------------------
     public void adicionaSalaChamada(String nome, int capacidadeMaxima, String descricao)
@@ -95,6 +94,129 @@ public class GerenciadorDeSalas
 
     }
 
+    public void cancelaReserva(String identificador)
+    { LocalDateTime tmpInicio, tmpFim;
+
+        if(listaDeSalas.isEmpty())
+        {
+            System.out.println("Não foi possivel cancelar a reserva!\nNenhuma sala cadastrada!");
+            return;
+        }
+
+        if(listaDeSalas.size() == 1)
+        { String nomeSala = listaDeSalas.get(0).getNome();
+            ArrayList<Reserva> tmplc = (ArrayList<Reserva>)reservasParaSala(nomeSala);
+
+            if(tmplc.isEmpty())
+            {
+                System.out.println("Nenhuma reserva encontrada para essa sala!");
+                return;
+            }
+            if(tmplc.size() == 1)
+            { if(tmplc.get(0).getUUID().toString().equals(identificador))
+            { ui = new UniversalInput();
+                Reserva cancelada = tmplc.get(0);
+                System.out.println("Reserva encontrada!");
+                System.out.println("Deseja mesmo cancela-la?");
+                int escolha = ui.escan_escolha();
+
+                if(escolha == 1) {
+                    cancelaReserva(cancelada);
+                    System.out.println("Ok! Reserva cancelada com sucesso!");
+                    return;
+                }
+                if(escolha == 0) {
+                    System.out.println("Ok, não a cancelaremos");
+                    return;
+                }
+                else {System.out.println("Erro ao cancelar a reserva!"); return; }
+            } }else{
+
+                for(Reserva r : tmplc)
+                {
+                    if(r.getUUID().toString().equals(identificador))
+                    { ui = new UniversalInput();
+                        Reserva cancelada = tmplc.get(0);
+                        System.out.println("Reserva encontrada!");
+                        System.out.println("Deseja mesmo cancela-la?");
+                        int escolha = ui.escan_escolha();
+
+                        if(escolha == 1) {
+                            cancelaReserva(cancelada);
+                            System.out.println("Ok! Reserva cancelada com sucesso!");
+                            return;
+                        }
+                        if(escolha == 0) {
+                            System.out.println("Ok, não a cancelaremos");
+                            return;
+                        }
+                        else { System.out.println("Erro ao cancelar a reserva!"); return; }
+                    }
+
+                    System.out.println("Reserva não encontrada");
+
+                } } }
+        else {
+
+            for(Sala s : listaDeSalas)
+            {
+                String nomeSala = s.getNome();
+                ArrayList<Reserva> tmplc = (ArrayList<Reserva>)reservasParaSala(nomeSala);
+
+                if(tmplc.isEmpty())
+                {
+                    System.out.println("Nenhuma reserva encontrada para essa sala!");
+                    return;
+                }
+                if(tmplc.size() == 1)
+                { if(tmplc.get(0).getUUID().toString().equals(identificador))
+                { ui = new UniversalInput();
+                    Reserva cancelada = tmplc.get(0);
+                    System.out.println("Reserva encontrada!");
+                    System.out.println("Deseja mesmo cancela-la?");
+                    int escolha = ui.escan_escolha();
+
+                    if(escolha == 1) {
+                        cancelaReserva(cancelada);
+                        System.out.println("Ok! Reserva cancelada com sucesso!");
+                        return;
+                    }
+                    if(escolha == 0) {
+                        System.out.println("Ok, não a cancelaremos");
+                        return;
+                    }
+                    else {System.out.println("Erro ao cancelar a reserva!"); return; }
+                } }else{
+
+                    for(Reserva r : tmplc)
+                    {
+                        if(r.getUUID().toString().equals(identificador))
+                        { ui = new UniversalInput();
+                            Reserva cancelada = tmplc.get(0);
+                            System.out.println("Reserva encontrada!");
+                            System.out.println("Deseja mesmo cancela-la?");
+                            int escolha = ui.escan_escolha();
+
+                            if(escolha == 1) {
+                                cancelaReserva(cancelada);
+                                System.out.println("Ok! Reserva cancelada com sucesso!");
+                                return;
+                            }
+                            if(escolha == 0) {
+                                System.out.println("Ok, não a cancelaremos");
+                                return;
+                            }
+                            else { System.out.println("Erro ao cancelar a reserva!"); return; }
+                        }
+
+                        System.out.println("Reserva não encontrada");
+
+                    } }
+
+            } }
+
+    }
+
 
     Collection<Reserva> reservasParaSala(String nomeSala)
     {
@@ -113,7 +235,7 @@ public class GerenciadorDeSalas
         }
 
         if(listaDeSalas.size() == 1 && listaDeSalas.get(0).getNome().equals(nomeSala))
-        {List<Reserva> lc = (List<Reserva>) reservasParaSala(nomeSala);
+        { List<Reserva> lc = (List<Reserva>) reservasParaSala(nomeSala);
 
             for(Reserva r : lc)
             {

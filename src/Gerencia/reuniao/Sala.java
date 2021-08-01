@@ -81,6 +81,11 @@ public class Sala
                 return;
             }
             reservada.add(reserva);
+
+            System.out.println("Tudo certo, Reserva confirmada!");
+            System.out.println("Por favor, anote o identificador de sua reserva:\t"+reserva.getUUID().toString());
+
+            System.out.println("\nVoce precisará desse identificador para cancelar sua reserva!");
         } }
 
 
