@@ -33,7 +33,7 @@ public class Reserva
     public void print()
     {
         System.out.print("Sala reservada entre os dias "+inicio.getMonthValue()+"/"+inicio.getMonthValue());
-        System.out.println(" e "+fim.getDayOfMonth()+"/"+fim.getMonth());
+        System.out.println(" e "+fim.getDayOfMonth()+"/"+fim.getMonthValue());
 
         System.out.print("entre os horarios: "+inicio.getHour()+":"+inicio.getMinute());
         System.out.println(" e "+fim.getHour()+":"+fim.getMinute());
