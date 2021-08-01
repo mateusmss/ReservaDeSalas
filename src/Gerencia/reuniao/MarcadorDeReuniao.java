@@ -7,6 +7,7 @@ public class MarcadorDeReuniao
     //Construtor
 
     private List<Participantes> listaParticipantes = new ArrayList<>();
+    private List<String> listaParticipantesValidos = new ArrayList<>();
     private List<String> nomes = new ArrayList<>();
     private LocalDate dataInicial;
     private LocalDate dataFinal;
@@ -25,7 +26,19 @@ public class MarcadorDeReuniao
         listaParticipantes.add(p);
         Collections.sort(listaParticipantes);
     }
+    public List<String> participantesValidos(LocalDateTime inicioMarcada,LocalDateTime fimMarcada){
+        for(int i = 0;i < listaParticipantes.size();i++){
+            if(inicioMarcada.isBefore(listaParticipantes.get(i).getInicio()) && fimMarcada.isAfter(listaParticipantes.get(i).getFim())){
+                this.listaParticipantesValidos.add(listaParticipantes.get(i).getParticipante());
+            }
+        }
+        if(listaParticipantesValidos == null){
+            System.out.println("Nenhum participante consegue participar nesta data");
+            return listaParticipantesValidos;
+        }
+        return listaParticipantesValidos;
 
+    }
 //--------------------------------------------------------------------------
 
     public void mostraSobreposicao(){

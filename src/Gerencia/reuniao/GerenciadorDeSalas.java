@@ -27,6 +27,7 @@ public class GerenciadorDeSalas
 
         if(listaDeSalas.size() == 1) {
             listaDeSalas.clear();
+            System.out.println("Sala removida com sucesso");
             return;
         }
 
@@ -118,6 +119,8 @@ public class GerenciadorDeSalas
                 Reserva cancelada = tmplc.get(0);
                 System.out.println("Reserva encontrada!");
                 System.out.println("Deseja mesmo cancela-la?");
+                System.out.println("[0] Para parar cancelamento");
+                System.out.println("[1] Para confirmar o cancelamento");
                 int escolha = ui.escan_escolha();
 
                 if(escolha == 1) {
@@ -139,8 +142,9 @@ public class GerenciadorDeSalas
                         Reserva cancelada = tmplc.get(0);
                         System.out.println("Reserva encontrada!");
                         System.out.println("Deseja mesmo cancela-la?");
+                        System.out.println("[0] Não cancelar reserva");
+                        System.out.println("[1] Cancelar reserva");
                         int escolha = ui.escan_escolha();
-
                         if(escolha == 1) {
                             cancelaReserva(cancelada);
                             System.out.println("Ok! Reserva cancelada com sucesso!");
@@ -174,6 +178,8 @@ public class GerenciadorDeSalas
                     Reserva cancelada = tmplc.get(0);
                     System.out.println("Reserva encontrada!");
                     System.out.println("Deseja mesmo cancela-la?");
+                    System.out.println("[0] Para parar cancelamento");
+                    System.out.println("[1] Para confirmar o cancelamento");
                     int escolha = ui.escan_escolha();
 
                     if(escolha == 1) {
@@ -195,6 +201,8 @@ public class GerenciadorDeSalas
                             Reserva cancelada = tmplc.get(0);
                             System.out.println("Reserva encontrada!");
                             System.out.println("Deseja mesmo cancela-la?");
+                            System.out.println("[0] Para parar cancelamento");
+                            System.out.println("[1] Para confirmar o cancelamento");
                             int escolha = ui.escan_escolha();
 
                             if(escolha == 1) {

@@ -193,7 +193,7 @@ public class Main
                         System.out.println(" e " +dataFinalMonitor.getDayOfMonth()+ "/" +dataFinalMonitor.getMonthValue() +"/" + dataFinalMonitor.getYear() );
                     }
                     if (!dataInicial.isAfter(dataFinal) && !horaInicialteste.isAfter(horaFinalteste) && !dataInicialMonitor.isAfter(dataInicial) && !dataFinalMonitor.isBefore(dataFinal)){
-                        dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
+                        dataInicialParticipantes = LocalDateTime.of(dataInicial, horaInicialteste);
                         dataFinalParticipantes = LocalDateTime.of(dataFinal, horaFinalteste);
                         break;
                     }
@@ -290,13 +290,13 @@ public class Main
                     dataInicial = LocalDate.of(dataInicialteste.getYear(),dataInicialteste.getMonth(),dataInicialteste.getDayOfMonth());
 
                     //Horário inicial disponivel
-                    System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto:segundo");
+                    System.out.println("Digite o horário de inicio que você tem disponível para a reunião. Formato: hora:minuto");
                     String horaInicialScanner = escan.next();
                     DateTimeFormatter formatarHora = DateTimeFormatter.ofPattern("HH:mm");
                     LocalTime horaInicialteste = LocalTime.parse(horaInicialScanner, formatarHora);
                     dataInicialParticipantes = LocalDateTime.of(dataInicialteste, horaInicialteste);
                     //Horário final disponível
-                    System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto:segundo");
+                    System.out.println("Digite o horário de fim que você deseja fazer uma reserva. Formato: hora:minuto");
                     String horaFinalScanner = escan.next();
                     LocalTime horaFinalteste = LocalTime.parse(horaFinalScanner, formatarHora);
                     dataFinalParticipantes = LocalDateTime.of(dataInicial, horaFinalteste);
