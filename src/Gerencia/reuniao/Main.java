@@ -276,7 +276,7 @@ public class Main
                     System.out.println("Digite a chamada da sala que quer ser removida");
                     String nomeSalaRemovida = escan.next();
                     sala.removeSalaChamada(nomeSalaRemovida);
-                    System.out.println("Sala removida");
+                    //System.out.println("Sala removida");
                     break;
                 }
                 case "3":{//listaDeSalas
