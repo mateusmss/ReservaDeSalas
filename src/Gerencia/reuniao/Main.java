@@ -319,8 +319,10 @@ public class Main
                 case "5":{//cancelaReserva
                     System.out.println("--------------- Cancelar Reserva -----------");
                     System.out.println("                                                   ");
-                    System.out.println("Digite o nome da reserva: ");
+                    System.out.println("Digite o nome da sala: ");
                     String reservasSala = escan.next();
+                    System.out.println("Agora digite o horario da reserva");
+                    LocalTime lt = ui.escan_Time();
 
                     //sala.cancelaReserva();
                     break;

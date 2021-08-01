@@ -22,6 +22,16 @@ public class GerenciadorDeSalas
 //---------------------------------------------------------
     public void removeSalaChamada(String nomeDaSala)
     {
+        if(listaDeSalas.isEmpty()) {
+            System.out.println("Nenhuma sala para remover");
+            return;
+        }
+
+        if(listaDeSalas.size() == 1) {
+            listaDeSalas.clear();
+            return;
+        }
+
         for(Sala s : listaDeSalas)
         {
             if(s.getNome().equals(nomeDaSala))
@@ -49,6 +59,9 @@ public class GerenciadorDeSalas
     public Reserva reservaSalaChamada(String nomeDaSala, LocalDateTime
                                       dataInicial, LocalDateTime dataFinal)
     {
+        if(listaDeSalas.isEmpty())
+            System.out.println("Nenhuma sala cadastrada!");
+
         for(Sala s : listaDeSalas)
         {
             if(s.getNome().equals(nomeDaSala))
